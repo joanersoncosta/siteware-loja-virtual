@@ -1,5 +1,12 @@
 package br.com.siteware.conteudo.cliente.application.api;
 
-public class ClienteIdResponse {
+import java.util.UUID;
 
+import lombok.Builder;
+import lombok.Value;
+
+@Builder
+@Value
+public class ClienteIdResponse {
+	private UUID idCliente;
 }
