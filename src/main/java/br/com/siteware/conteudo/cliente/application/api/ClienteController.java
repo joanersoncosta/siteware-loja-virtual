@@ -40,4 +40,10 @@ public class ClienteController implements ClienteAPI {
 		return clienteDetalhado;
 	}
 
+	@Override
+	public void deletaClientePorId(UUID idCliente) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
