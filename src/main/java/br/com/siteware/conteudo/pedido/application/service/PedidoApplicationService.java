@@ -9,7 +9,6 @@ import br.com.siteware.conteudo.pedido.application.api.PedidoIdResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.application.repository.PedidoRepository;
 import br.com.siteware.conteudo.pedido.domain.Pedido;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 

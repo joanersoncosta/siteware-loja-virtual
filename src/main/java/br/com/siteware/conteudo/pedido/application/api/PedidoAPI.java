@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/v1/cliente/{idCliente}")
+@RequestMapping("/v1/cliente/{idCliente}/pedido")
 public interface PedidoAPI {
-	@PostMapping(path = "/pedido")
+	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
 	PedidoIdResponse postPedido(@PathVariable UUID idCliente, @RequestBody @Valid PedidoRequest pedidoRequest);
 }

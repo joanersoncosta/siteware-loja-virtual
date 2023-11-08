@@ -37,6 +37,7 @@ public class Pedido {
 	public Pedido(UUID idCliente, @Valid PedidoRequest pedidoRequest) {
 		this.idCliente = idCliente;
 		this.pedidoStatus = pedidoRequest.getPedidoStatus();
+		this.momentoDoPedido = LocalDateTime.now();
 	}
 
 }
