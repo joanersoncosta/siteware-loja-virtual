@@ -3,8 +3,11 @@ package br.com.siteware.conteudo.pedido.domain;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import br.com.siteware.conteudo.pedido.domain.enuns.PedidoStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,7 +27,8 @@ public class Pedido {
 	@NotNull
 	@Column(columnDefinition = "uuid", name = "idCliente", nullable = false)
 	private UUID idCliente;
-
+	@Enumerated(value = EnumType.STRING)
+	private PedidoStatus pedidoStatus;
 	private LocalDateTime momentoDoPedido;
 
 }
