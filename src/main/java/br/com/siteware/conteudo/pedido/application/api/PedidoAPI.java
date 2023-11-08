@@ -14,8 +14,8 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/v1/cliente/{idCliente}")
-public interface EnderecoAPI {
-	@PostMapping(path = "/endereco")
+public interface PedidoAPI {
+	@PostMapping(path = "/pedido")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	PedidoIdResponse postEndereco(@PathVariable UUID idCliente, @RequestBody @Valid PedidoRequest pedidoRequest);
+	PedidoIdResponse postPedido(@PathVariable UUID idCliente, @RequestBody @Valid PedidoRequest pedidoRequest);
 }
