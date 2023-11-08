@@ -1,9 +1,11 @@
 package br.com.siteware.conteudo.cliente.application.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import br.com.siteware.conteudo.cliente.application.api.ClienteDetalhadoResponse;
 import br.com.siteware.conteudo.cliente.application.api.ClienteIdResponse;
 import br.com.siteware.conteudo.cliente.application.api.ClienteListResponse;
 import br.com.siteware.conteudo.cliente.application.api.ClienteRequest;
@@ -32,6 +34,13 @@ private final ClientRepository clientRepository;
 		List<Cliente> clientes = clientRepository.buscaTodasPessoas();
 		log.info("[finaliza] ClienteApplicationService - buscaTodasPessoas");
 		return ClienteListResponse.converteListaClientes(clientes);
+	}
+
+	@Override
+	public ClienteDetalhadoResponse buscaClientePorId(UUID idCliente) {
+		log.info("[inicia] ClienteApplicationService - buscaClientePorId");
+		log.info("[finaliza] ClienteApplicationService - buscaClientePorId");
+		return null;
 	}
 
 }
