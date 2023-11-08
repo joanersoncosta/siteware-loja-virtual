@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import br.com.siteware.conteudo.cliente.application.api.ClienteAlteracaoRequest;
 import br.com.siteware.conteudo.cliente.application.api.ClienteRequest;
 import br.com.siteware.conteudo.cliente.domain.enuns.Sexo;
 import jakarta.persistence.Column;
@@ -53,5 +54,14 @@ public class Cliente {
 		this.sexo = clienteRequest.getSexo();
 		this.dataNascimento = clienteRequest.getDataNascimento();
 		this.momentoDoDacastro = LocalDateTime.now();
+	}
+
+	public void altera(ClienteAlteracaoRequest clienteAlteracaoRequest) {
+		this.nome = clienteAlteracaoRequest.getNome();
+		this.telefone = clienteAlteracaoRequest.getTelefone();
+		this.sexo = clienteAlteracaoRequest.getSexo();
+		this.dataNascimento = clienteAlteracaoRequest.getDataNascimento();
+		this.dataHoraDaultimaAlteracao = LocalDateTime.now();
+		
 	}
 }
