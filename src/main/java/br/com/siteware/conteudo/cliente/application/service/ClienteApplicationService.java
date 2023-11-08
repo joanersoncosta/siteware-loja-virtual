@@ -1,14 +1,18 @@
 package br.com.siteware.conteudo.cliente.application.service;
 
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import br.com.siteware.conteudo.cliente.application.api.ClienteDetalhadoResponse;
 import br.com.siteware.conteudo.cliente.application.api.ClienteIdResponse;
 import br.com.siteware.conteudo.cliente.application.api.ClienteListResponse;
 import br.com.siteware.conteudo.cliente.application.api.ClienteRequest;
 import br.com.siteware.conteudo.cliente.application.repository.ClientRepository;
 import br.com.siteware.conteudo.cliente.domain.Cliente;
+import br.com.siteware.conteudo.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -32,6 +36,14 @@ private final ClientRepository clientRepository;
 		List<Cliente> clientes = clientRepository.buscaTodasPessoas();
 		log.info("[finaliza] ClienteApplicationService - buscaTodasPessoas");
 		return ClienteListResponse.converteListaClientes(clientes);
+	}
+
+	@Override
+	public ClienteDetalhadoResponse buscaClientePorId(UUID idCliente) {
+		log.info("[inicia] ClienteApplicationService - buscaClientePorId");
+		Cliente cliente = clientRepository.buscaClientePorId(idCliente).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado!"));
+		log.info("[finaliza] ClienteApplicationService - buscaClientePorId");
+		return new ClienteDetalhadoResponse(cliente);
 	}
 
 }

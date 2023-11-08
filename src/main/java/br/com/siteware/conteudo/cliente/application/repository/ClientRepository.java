@@ -9,5 +9,6 @@ import br.com.siteware.conteudo.cliente.domain.Cliente;
 public interface ClientRepository {
 	Cliente salvaCliente(Cliente cliente);
 	List<Cliente> buscaTodasPessoas();
+	Optional<Cliente> buscaClientePorId(UUID idCliente);
 
 }
