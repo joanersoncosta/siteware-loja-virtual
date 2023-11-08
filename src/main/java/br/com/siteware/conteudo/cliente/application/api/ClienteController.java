@@ -42,7 +42,10 @@ public class ClienteController implements ClienteAPI {
 
 	@Override
 	public void deletaClientePorId(UUID idCliente) {
-		// TODO Auto-generated method stub
+		log.info("[inicia] ClienteController - deletaClientePorId");
+		log.info("[idCliente] {}", idCliente);
+		serviceCliente.deletaClientePorId(idCliente);		
+		log.info("[finaliza] ClienteController - deletaClientePorId");		
 		
 	}
 

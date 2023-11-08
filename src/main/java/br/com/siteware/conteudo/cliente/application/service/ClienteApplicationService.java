@@ -46,4 +46,12 @@ private final ClientRepository clientRepository;
 		return new ClienteDetalhadoResponse(cliente);
 	}
 
+	@Override
+	public void deletaClientePorId(UUID idCliente) {
+		log.info("[inicia] ClienteApplicationService - deletaClientePorId");
+		Cliente cliente = clientRepository.buscaClientePorId(idCliente).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado!"));
+		clientRepository.deletaClientePorId(cliente);
+		log.info("[finaliza] ClienteApplicationService - deletaClientePorId");
+	}
+
 }
