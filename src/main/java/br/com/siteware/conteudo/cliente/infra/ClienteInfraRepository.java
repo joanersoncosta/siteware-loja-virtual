@@ -1,5 +1,7 @@
 package br.com.siteware.conteudo.cliente.infra;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.siteware.conteudo.cliente.application.repository.ClientRepository;
@@ -15,10 +17,18 @@ public class ClienteInfraRepository implements ClientRepository {
 	
 	@Override
 	public Cliente salvaCliente(Cliente cliente) {
-		log.info("[inicia] ClienteController - postCliente");
+		log.info("[inicia] ClienteInfraRepository - postCliente");
 		clientSpringDataJPARepository.save(cliente);
-		log.info("[finaliza] ClienteController - postCliente");
+		log.info("[finaliza] ClienteInfraRepository - postCliente");
 		return cliente;
+	}
+
+	@Override
+	public List<Cliente> buscaTodasPessoas() {
+		log.info("[inicia] ClienteInfraRepository - buscaTodasPessoas");
+		List<Cliente> todosClientes = clientSpringDataJPARepository.findAll();
+		log.info("[inicia] ClienteInfraRepository - buscaTodasPessoas");
+		return todosClientes;
 	}
 
 }

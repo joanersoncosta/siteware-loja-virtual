@@ -24,8 +24,10 @@ public class ClienteController implements ClienteAPI {
 
 	@Override
 	public List<ClienteListResponse> getTodasClientes() {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("[inicia] ClienteController - getTodasClientes");
+		List<ClienteListResponse> clientes = serviceCliente.buscaTodasPessoas();		
+		log.info("[finaliza] ClienteController - getTodasClientes");		
+		return clientes;
 	}
 
 }

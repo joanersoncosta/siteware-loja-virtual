@@ -27,7 +27,7 @@ public class ClienteListResponse {
 		this.dataNascimento = cliente.getDataNascimento();
 	}
 	
-	public static List<ClienteListResponse> converteListaPessoas(List<Cliente> clientes){
+	public static List<ClienteListResponse> converteListaClientes(List<Cliente> clientes){
 		return clientes.stream().map(ClienteListResponse::new).collect(Collectors.toList());
 	}
 }

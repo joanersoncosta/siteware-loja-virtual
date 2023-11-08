@@ -1,8 +1,11 @@
 package br.com.siteware.conteudo.cliente.application.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import br.com.siteware.conteudo.cliente.application.api.ClienteIdResponse;
+import br.com.siteware.conteudo.cliente.application.api.ClienteListResponse;
 import br.com.siteware.conteudo.cliente.application.api.ClienteRequest;
 import br.com.siteware.conteudo.cliente.application.repository.ClientRepository;
 import br.com.siteware.conteudo.cliente.domain.Cliente;
@@ -21,6 +24,14 @@ private final ClientRepository clientRepository;
 		Cliente cliente = clientRepository.salvaCliente(new Cliente(clienteRequest));
 		log.info("[finaliza] ClienteApplicationService - salvaCliente");
 		return ClienteIdResponse.builder().idCliente(cliente.getIdCliente()).build();
+	}
+
+	@Override
+	public List<ClienteListResponse> buscaTodasPessoas() {
+		log.info("[inicia] ClienteApplicationService - buscaTodasPessoas");
+		List<Cliente> clientes = clientRepository.buscaTodasPessoas();
+		log.info("[finaliza] ClienteApplicationService - buscaTodasPessoas");
+		return ClienteListResponse.converteListaClientes(clientes);
 	}
 
 }
