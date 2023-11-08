@@ -1,8 +1,10 @@
 package br.com.siteware.conteudo.cliente.domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import br.com.siteware.conteudo.cliente.application.api.ClienteRequest;
 import br.com.siteware.conteudo.cliente.domain.enuns.Sexo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -33,21 +35,23 @@ public class Cliente {
 	@Email
 	@Column(unique = true)
 	private String email;
+	@NotBlank
+	private String telefone;
 	@NotNull
 	@Enumerated(value = EnumType.STRING)
 	private Sexo sexo;
-	@NotBlank
-	private String telefone;
+	@NotNull
+	private LocalDate dataNascimento;
 	
 	private LocalDateTime momentoDoDacastro;
 	private LocalDateTime dataHoraDaultimaAlteracao;
 	
-	public Cliente(@NotBlank String nome, @NotBlank @Email String email, @NotNull Sexo sexo,
-			@NotBlank String telefone) {
-		this.nome = nome;
-		this.email = email;
-		this.sexo = sexo;
-		this.telefone = telefone;
+	public Cliente(ClienteRequest clienteRequest) {
+		this.nome = clienteRequest.getNome();
+		this.email = clienteRequest.getEmail();
+		this.telefone = clienteRequest.getTelefone();
+		this.sexo = clienteRequest.getSexo();
+		this.dataNascimento = clienteRequest.getDataNascimento();
 		this.momentoDoDacastro = LocalDateTime.now();
 	}
 }
