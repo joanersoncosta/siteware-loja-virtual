@@ -1,6 +1,8 @@
 package br.com.siteware.conteudo.cliente.infra;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +31,13 @@ public class ClienteInfraRepository implements ClientRepository {
 		List<Cliente> todosClientes = clientSpringDataJPARepository.findAll();
 		log.info("[inicia] ClienteInfraRepository - buscaTodasPessoas");
 		return todosClientes;
+	}
+
+	@Override
+	public Optional<Cliente> buscaClientePorId(UUID idCliente) {
+		log.info("[inicia] ClienteInfraRepository - buscaTodasPessoas");
+		log.info("[inicia] ClienteInfraRepository - buscaTodasPessoas");
+		return Optional.empty();
 	}
 
 }

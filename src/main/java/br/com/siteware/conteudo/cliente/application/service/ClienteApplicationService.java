@@ -39,8 +39,9 @@ private final ClientRepository clientRepository;
 	@Override
 	public ClienteDetalhadoResponse buscaClientePorId(UUID idCliente) {
 		log.info("[inicia] ClienteApplicationService - buscaClientePorId");
+		Cliente cliente = clientRepository.buscaClientePorId(idCliente).orElseThrow();
 		log.info("[finaliza] ClienteApplicationService - buscaClientePorId");
-		return null;
+		return new ClienteDetalhadoResponse(cliente);
 	}
 
 }
