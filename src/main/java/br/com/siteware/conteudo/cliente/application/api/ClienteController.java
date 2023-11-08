@@ -1,5 +1,7 @@
 package br.com.siteware.conteudo.cliente.application.api;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.siteware.conteudo.cliente.application.service.ClienteService;
@@ -18,6 +20,12 @@ public class ClienteController implements ClienteAPI {
 		ClienteIdResponse clienteId = serviceCliente.salvaCliente(ClienteRequest);
 		log.info("[finaliza] ClienteController - postCliente");
 		return clienteId;
+	}
+
+	@Override
+	public List<ClienteListResponse> getTodasClientes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
