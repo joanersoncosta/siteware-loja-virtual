@@ -1,5 +1,6 @@
 package br.com.siteware.conteudo.pedido.application.api;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,12 @@ public interface PedidoAPI {
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
 	PedidoIdResponse postPedido(@PathVariable(value = "idCliente") UUID idCliente, @RequestBody @Valid PedidoRequest pedidoRequest);
+	
 	@GetMapping(path = "/{idPedido}")
-	@ResponseStatus(value = HttpStatus.CREATED)
+	@ResponseStatus(value = HttpStatus.OK)
 	PedidoDetalhadoResponse buscaPedidoPorId(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
+
+	@GetMapping
+	@ResponseStatus(value = HttpStatus.OK)
+	List<PedidoListDetalhadoResponse> buscaTodosPedidosPorId(@PathVariable(value = "idCliente") UUID idCliente);
 }

@@ -1,5 +1,6 @@
 package br.com.siteware.conteudo.pedido.application.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import br.com.siteware.conteudo.cliente.application.service.ClienteService;
 import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoIdResponse;
+import br.com.siteware.conteudo.pedido.application.api.PedidoListDetalhadoResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.application.repository.PedidoRepository;
 import br.com.siteware.conteudo.pedido.domain.Pedido;
@@ -39,5 +41,6 @@ public class PedidoApplicationService implements PedidoService {
 		log.info("[finaliza] PedidoApplicationService - salvaPedido");
 		return new PedidoDetalhadoResponse(pedido);
 	}
+
 
 }

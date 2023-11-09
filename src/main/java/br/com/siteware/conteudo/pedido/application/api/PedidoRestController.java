@@ -1,5 +1,6 @@
 package br.com.siteware.conteudo.pedido.application.api;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -25,10 +26,18 @@ public class PedidoRestController implements PedidoAPI {
 	
 	@Override
 	public PedidoDetalhadoResponse buscaPedidoPorId(UUID idCliente, UUID idPedido) {
-		log.info("[inicia] PedidoRestController - postPedido");
+		log.info("[inicia] PedidoRestController - buscaPedidoPorId");
 		log.info("[idCliente] {}, [idPedido] {}", idCliente, idPedido);	
 		PedidoDetalhadoResponse pedidoResponse = pedidoService.buscaPedidoPorId(idCliente, idPedido);
-		log.info("[finaliza] PedidoRestController - postPedido");
+		log.info("[finaliza] PedidoRestController - buscaPedidoPorId");
 		return pedidoResponse;
+	}
+
+	@Override
+	public List<PedidoListDetalhadoResponse> buscaTodosPedidosPorId(UUID idCliente) {
+		log.info("[inicia] PedidoRestController - buscaTodosPedidosPorId");
+		log.info("[idCliente] {}", idCliente);
+		log.info("[finaliza] PedidoRestController - buscaTodosPedidosPorId");
+		return null;
 	}
 }
