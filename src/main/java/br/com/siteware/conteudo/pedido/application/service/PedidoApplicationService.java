@@ -42,5 +42,12 @@ public class PedidoApplicationService implements PedidoService {
 		return new PedidoDetalhadoResponse(pedido);
 	}
 
+	@Override
+	public List<PedidoListDetalhadoResponse> buscaTodosPedidosPorId(UUID idCliente) {
+		log.info("[inicia] PedidoApplicationService - salvaPedido");
+		clienteServicce.buscaClientePorId(idCliente);	
+		log.info("[finaliza] PedidoApplicationService - salvaPedido");
+			return null;
+	}
 
 }
