@@ -24,7 +24,7 @@ public class PedidoRestController implements PedidoAPI {
 	}
 	
 	@Override
-	public PedidoDetalhadoResponse postPedido(UUID idCliente, UUID idPedido) {
+	public PedidoDetalhadoResponse buscaPedidoPorId(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] PedidoRestController - postPedido");
 		log.info("[idCliente] {}", idCliente);		
 		log.info("[finaliza] PedidoRestController - postPedido");

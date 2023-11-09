@@ -22,5 +22,5 @@ public interface PedidoAPI {
 	PedidoIdResponse postPedido(@PathVariable(value = "idCliente") UUID idCliente, @RequestBody @Valid PedidoRequest pedidoRequest);
 	@GetMapping(path = "/{idPedido}")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	PedidoDetalhadoResponse postPedido(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
+	PedidoDetalhadoResponse buscaPedidoPorId(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
 }
