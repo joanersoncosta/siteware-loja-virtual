@@ -27,7 +27,7 @@ public class PedidoRestController implements PedidoAPI {
 	public PedidoDetalhadoResponse buscaPedidoPorId(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] PedidoRestController - postPedido");
 		log.info("[idCliente] {}, [idPedido] {}", idCliente, idPedido);	
-		PedidoDetalhadoResponse pedidoResponse = pedidoService.busbuscaPedidoPorId(idCliente, idPedido);
+		PedidoDetalhadoResponse pedidoResponse = pedidoService.buscaPedidoPorId(idCliente, idPedido);
 		log.info("[finaliza] PedidoRestController - postPedido");
 		return pedidoResponse;
 	}

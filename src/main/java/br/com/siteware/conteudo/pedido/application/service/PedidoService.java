@@ -8,6 +8,6 @@ import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 
 public interface PedidoService {
 	PedidoIdResponse salvaPedido(UUID idCliente, PedidoRequest pedidoRequest);
-	PedidoDetalhadoResponse busbuscaPedidoPorId(UUID idCliente, UUID idPedido);
+	PedidoDetalhadoResponse buscaPedidoPorId(UUID idCliente, UUID idPedido);
 
 }

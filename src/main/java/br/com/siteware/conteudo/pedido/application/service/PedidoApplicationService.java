@@ -2,9 +2,11 @@ package br.com.siteware.conteudo.pedido.application.service;
 
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import br.com.siteware.conteudo.cliente.application.service.ClienteService;
+import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoIdResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
@@ -30,11 +32,12 @@ public class PedidoApplicationService implements PedidoService {
 	}
 
 	@Override
-	public PedidoDetalhadoResponse busbuscaPedidoPorId(UUID idCliente, UUID idPedido) {
+	public PedidoDetalhadoResponse buscaPedidoPorId(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] PedidoApplicationService - salvaPedido");
-		clienteServicce.buscaClientePorId(idCliente);		
+		clienteServicce.buscaClientePorId(idCliente);	
+		Pedido pedido = pedidoRepository.buscaPedidoPorId(idPedido).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
 		log.info("[finaliza] PedidoApplicationService - salvaPedido");
-		return null;
+		return new PedidoDetalhadoResponse(pedido);
 	}
 
 }

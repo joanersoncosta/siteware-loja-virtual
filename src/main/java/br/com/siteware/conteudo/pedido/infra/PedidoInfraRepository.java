@@ -1,5 +1,8 @@
 package br.com.siteware.conteudo.pedido.infra;
 
+import java.util.Optional;
+import java.util.UUID;
+
 import org.springframework.stereotype.Repository;
 
 import br.com.siteware.conteudo.pedido.application.repository.PedidoRepository;
@@ -21,4 +24,11 @@ public class PedidoInfraRepository implements PedidoRepository {
 		return pedido;
 	}
 
+	@Override
+	public Optional<Pedido> buscaPedidoPorId(UUID idPedido) {
+		log.info("[inicia] PedidoInfraRepository - salvaPedido");
+		Optional<Pedido> pedido = PedidoSpringDataJPARepository.findById(idPedido);
+		log.info("[finaliza] PedidoInfraRepository - salvaPedido");
+		return pedido;
+	}
 }
