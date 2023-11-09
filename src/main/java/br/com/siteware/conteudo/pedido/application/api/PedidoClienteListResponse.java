@@ -25,6 +25,7 @@ public class PedidoClienteListResponse {
 		this.descricao = pedido.getDescricao();
 		this.momentoDoPedido = pedido.getMomentoDoPedido();
 	}
+	
 	public static List<PedidoClienteListResponse> converte(List<Pedido> enderecosDaPessoa) {
 		return enderecosDaPessoa
 				.stream()
