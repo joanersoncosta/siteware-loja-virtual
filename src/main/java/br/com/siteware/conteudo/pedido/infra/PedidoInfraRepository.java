@@ -1,5 +1,6 @@
 package br.com.siteware.conteudo.pedido.infra;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,5 +31,13 @@ public class PedidoInfraRepository implements PedidoRepository {
 		Optional<Pedido> pedido = PedidoSpringDataJPARepository.findById(idPedido);
 		log.info("[finaliza] PedidoInfraRepository - salvaPedido");
 		return pedido;
+	}
+
+	@Override
+	public List<Pedido> buscaTodosPedidosPorId() {
+		log.info("[inicia] PedidoInfraRepository - salvaPedido");
+		List<Pedido> pedidos = PedidoSpringDataJPARepository.findAll();
+		log.info("[finaliza] PedidoInfraRepository - salvaPedido");
+			return pedidos;
 	}
 }

@@ -10,7 +10,7 @@ import br.com.siteware.conteudo.cliente.application.service.ClienteService;
 import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoIdResponse;
-import br.com.siteware.conteudo.pedido.application.api.PedidoListDetalhadoResponse;
+import br.com.siteware.conteudo.pedido.application.api.PedidoClienteListResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.application.repository.PedidoRepository;
 import br.com.siteware.conteudo.pedido.domain.Pedido;
@@ -43,11 +43,12 @@ public class PedidoApplicationService implements PedidoService {
 	}
 
 	@Override
-	public List<PedidoListDetalhadoResponse> buscaTodosPedidosPorId(UUID idCliente) {
+	public List<PedidoClienteListResponse> buscaTodosPedidosPorId(UUID idCliente) {
 		log.info("[inicia] PedidoApplicationService - salvaPedido");
 		clienteServicce.buscaClientePorId(idCliente);	
+		List<Pedido> pedidos = pedidoRepository.buscaTodosPedidosPorId();
 		log.info("[finaliza] PedidoApplicationService - salvaPedido");
-			return null;
+			return PedidoClienteListResponse.converte(pedidos);
 	}
 
 }

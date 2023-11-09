@@ -28,5 +28,5 @@ public interface PedidoAPI {
 
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)
-	List<PedidoListDetalhadoResponse> buscaTodosPedidosPorId(@PathVariable(value = "idCliente") UUID idCliente);
+	List<PedidoClienteListResponse> buscaTodosPedidosPorId(@PathVariable(value = "idCliente") UUID idCliente);
 }
