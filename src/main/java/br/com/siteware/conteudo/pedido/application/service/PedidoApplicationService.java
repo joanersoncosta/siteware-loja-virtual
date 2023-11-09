@@ -25,9 +25,7 @@ public class PedidoApplicationService implements PedidoService {
 		clienteServicce.buscaClientePorId(idCliente);
 		Pedido pedido = pedidoRepository.salvaPedido(new Pedido(idCliente, pedidoRequest));
 		log.info("[finaliza] PedidoApplicationService - salvaPedido");
-		return PedidoIdResponse.builder()
-				.idPedido(pedido.getIdPedido())
-				.build();
+		return PedidoIdResponse.builder().idPedido(pedido.getIdPedido()).build();
 	}
 
 }

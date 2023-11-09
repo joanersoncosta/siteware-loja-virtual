@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -16,12 +15,19 @@ public class PedidoRestController implements PedidoAPI {
 	private final PedidoService pedidoService;
 	
 	@Override
-	public PedidoIdResponse postPedido(UUID idCliente, @Valid PedidoRequest pedidoRequest) {
+	public PedidoIdResponse postPedido(UUID idCliente, PedidoRequest pedidoRequest) {
 	log.info("[inicia] PedidoRestController - postPedido");
+	log.info("[idCliente] {}", idCliente);
 	PedidoIdResponse pedidoIdResponse = pedidoService.salvaPedido(idCliente, pedidoRequest);
 	log.info("[finaliza] PedidoRestController - postPedido");
-		return pedidoIdResponse;
+	return pedidoIdResponse;
 	}
-
-
+	
+	@Override
+	public PedidoDetalhadoResponse postPedido(UUID idCliente, UUID idPedido) {
+		log.info("[inicia] PedidoRestController - postPedido");
+		log.info("[idCliente] {}", idCliente);		
+		log.info("[finaliza] PedidoRestController - postPedido");
+		return null;
+	}
 }

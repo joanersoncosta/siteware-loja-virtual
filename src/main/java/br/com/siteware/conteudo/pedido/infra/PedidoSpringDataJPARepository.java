@@ -1,4 +1,4 @@
-package br.com.siteware.conteudo.pedido.application.infra;
+package br.com.siteware.conteudo.pedido.infra;
 
 import java.util.UUID;
 

@@ -12,7 +12,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -21,7 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Entity
-public class Pedido {
+public class Pedido{
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idPedido", updatable = false, unique = true, nullable = false)
@@ -34,9 +34,14 @@ public class Pedido {
 	private PedidoStatus pedidoStatus;
 	private LocalDateTime momentoDoPedido;
 
-	public Pedido(UUID idCliente, @Valid PedidoRequest pedidoRequest) {
+	public Pedido(UUID idCliente, PedidoRequest pedidoRequest) {
 		this.idCliente = idCliente;
-		this.pedidoStatus = pedidoRequest.getPedidoStatus();
+		this.pedidoStatus = PedidoStatus.PENDENTE;
+		this.momentoDoPedido = LocalDateTime.now();
+	}
+	
+	public Pedido(PedidoRequest pedidoRequest) {
+		this.pedidoStatus = PedidoStatus.PENDENTE;
 		this.momentoDoPedido = LocalDateTime.now();
 	}
 
