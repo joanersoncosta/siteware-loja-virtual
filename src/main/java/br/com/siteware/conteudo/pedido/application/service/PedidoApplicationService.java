@@ -10,6 +10,7 @@ import br.com.siteware.conteudo.cliente.application.service.ClienteService;
 import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoIdResponse;
+import br.com.siteware.conteudo.pedido.application.api.PedidoAlteracaoRequest;
 import br.com.siteware.conteudo.pedido.application.api.PedidoClienteListResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.application.repository.PedidoRepository;
@@ -61,12 +62,11 @@ public class PedidoApplicationService implements PedidoService {
 	}
 
 	@Override
-	public void alteraPedido(UUID idCliente, UUID idPedido) {
+	public void alteraPedido(UUID idCliente, UUID idPedido, PedidoAlteracaoRequest pedidoAlteracaoRequest) {
 		log.info("[inicia] PedidoApplicationService - alteraPedido");
 		clienteServicce.buscaClientePorId(idCliente);	
 		Pedido pedido = pedidoRepository.buscaPedidoPorId(idPedido).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
 		log.info("[finaliza] PedidoApplicationService - alteraPedido");
-		
 	}
 
 }
