@@ -35,20 +35,28 @@ public class PedidoApplicationService implements PedidoService {
 
 	@Override
 	public PedidoDetalhadoResponse buscaPedidoPorId(UUID idCliente, UUID idPedido) {
-		log.info("[inicia] PedidoApplicationService - salvaPedido");
+		log.info("[inicia] PedidoApplicationService - buscaPedidoPorId");
 		clienteServicce.buscaClientePorId(idCliente);	
 		Pedido pedido = pedidoRepository.buscaPedidoPorId(idPedido).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
-		log.info("[finaliza] PedidoApplicationService - salvaPedido");
+		log.info("[finaliza] PedidoApplicationService - buscaPedidoPorId");
 		return new PedidoDetalhadoResponse(pedido);
 	}
 
 	@Override
 	public List<PedidoClienteListResponse> buscaTodosPedidosPorId(UUID idCliente) {
-		log.info("[inicia] PedidoApplicationService - salvaPedido");
+		log.info("[inicia] PedidoApplicationService - buscaTodosPedidosPorId");
 		clienteServicce.buscaClientePorId(idCliente);	
 		List<Pedido> pedidos = pedidoRepository.buscaTodosPedidosPorId();
-		log.info("[finaliza] PedidoApplicationService - salvaPedido");
+		log.info("[finaliza] PedidoApplicationService - buscaTodosPedidosPorId");
 			return PedidoClienteListResponse.converte(pedidos);
+	}
+
+	@Override
+	public void deletePedidoPorId(UUID idCliente, UUID idPedido) {
+		log.info("[inicia] PedidoApplicationService - deletePedidoPorId");
+		clienteServicce.buscaClientePorId(idCliente);	
+		
+		log.info("[finaliza] PedidoApplicationService - deletePedidoPorId");
 	}
 
 }

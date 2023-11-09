@@ -12,5 +12,6 @@ public interface PedidoService {
 	PedidoIdResponse salvaPedido(UUID idCliente, PedidoRequest pedidoRequest);
 	PedidoDetalhadoResponse buscaPedidoPorId(UUID idCliente, UUID idPedido);
 	List<PedidoClienteListResponse> buscaTodosPedidosPorId(UUID idCliente);
+	void deletePedidoPorId(UUID idCliente, UUID idPedido);
 
 }

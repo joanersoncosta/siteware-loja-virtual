@@ -46,6 +46,7 @@ public class PedidoRestController implements PedidoAPI {
 	public void deletePedidoPorId(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] PedidoRestController - deletePedidoPorId");
 		log.info("[idCliente] {}", idCliente);
+		pedidoService.deletePedidoPorId(idCliente, idPedido);
 		log.info("[finaliza] PedidoRestController - deletePedidoPorId");
 	}
 }
