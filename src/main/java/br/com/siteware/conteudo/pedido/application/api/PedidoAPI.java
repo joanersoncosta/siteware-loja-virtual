@@ -32,7 +32,7 @@ public interface PedidoAPI {
 	List<PedidoClienteListResponse> buscaTodosPedidosPorId(@PathVariable(value = "idCliente") UUID idCliente);
 	
 	@DeleteMapping(path = "/{idPedido}")
-	@ResponseStatus(value = HttpStatus.OK)
-	PedidoDetalhadoResponse deletePedidoPorId(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	void deletePedidoPorId(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
 	
 }

@@ -43,10 +43,9 @@ public class PedidoRestController implements PedidoAPI {
 	}
 
 	@Override
-	public PedidoDetalhadoResponse deletePedidoPorId(UUID idCliente, UUID idPedido) {
+	public void deletePedidoPorId(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] PedidoRestController - deletePedidoPorId");
 		log.info("[idCliente] {}", idCliente);
 		log.info("[finaliza] PedidoRestController - deletePedidoPorId");
-		return null;
 	}
 }
