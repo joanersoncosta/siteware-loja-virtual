@@ -3,6 +3,7 @@ package br.com.siteware.conteudo.pedido.domain;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import br.com.siteware.conteudo.pedido.application.api.PedidoAlteracaoRequest;
 import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.domain.enuns.PedidoStatus;
 import jakarta.persistence.Column;
@@ -43,6 +44,12 @@ public class Pedido{
 		this.idCliente = idCliente;
 		this.pedidoStatus = PedidoStatus.PENDENTE;
 		this.descricao = pedidoRequest.getDescricao();
+		this.momentoDoPedido = LocalDateTime.now();
+	}
+
+	public void altera(PedidoAlteracaoRequest pedidoAlteracaoRequest) {
+		this.pedidoStatus = PedidoStatus.PENDENTE;
+		this.descricao = pedidoAlteracaoRequest.getDescricao();
 		this.momentoDoPedido = LocalDateTime.now();
 	}
 
