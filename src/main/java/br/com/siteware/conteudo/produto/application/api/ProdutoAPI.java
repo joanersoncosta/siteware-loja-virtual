@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/v1/pedido/{idPedido}/produto")
+@RequestMapping("/v1/cliente/{idCliente}/pedido/{idPedido}")
 public interface ProdutoAPI {
 	
-	@PostMapping
+	@PostMapping(path = "/produto")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	ProdutoIdResponse postProduto(@PathVariable(value = "idPedido") UUID idPedido, @RequestBody @Valid ProdutoRequest produtoRequest);
+	ProdutoIdResponse postProduto(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @RequestBody @Valid ProdutoRequest produtoRequest);
 
 }
