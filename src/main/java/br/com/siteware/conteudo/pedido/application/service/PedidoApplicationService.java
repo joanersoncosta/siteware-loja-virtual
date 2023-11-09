@@ -67,6 +67,7 @@ public class PedidoApplicationService implements PedidoService {
 		clienteServicce.buscaClientePorId(idCliente);	
 		Pedido pedido = pedidoRepository.buscaPedidoPorId(idPedido).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
 		pedido.altera(pedidoAlteracaoRequest);
+		pedidoRepository.salvaPedido(pedido);
 		log.info("[finaliza] PedidoApplicationService - alteraPedido");
 		
 	}
