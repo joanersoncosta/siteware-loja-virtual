@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import br.com.siteware.conteudo.cliente.application.service.ClienteService;
+import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoIdResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.application.repository.PedidoRepository;
@@ -26,6 +27,14 @@ public class PedidoApplicationService implements PedidoService {
 		Pedido pedido = pedidoRepository.salvaPedido(new Pedido(idCliente, pedidoRequest));
 		log.info("[finaliza] PedidoApplicationService - salvaPedido");
 		return PedidoIdResponse.builder().idPedido(pedido.getIdPedido()).build();
+	}
+
+	@Override
+	public PedidoDetalhadoResponse busbuscaPedidoPorId(UUID idCliente, UUID idPedido) {
+		log.info("[inicia] PedidoApplicationService - salvaPedido");
+		clienteServicce.buscaClientePorId(idCliente);		
+		log.info("[finaliza] PedidoApplicationService - salvaPedido");
+		return null;
 	}
 
 }
