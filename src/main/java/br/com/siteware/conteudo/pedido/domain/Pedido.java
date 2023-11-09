@@ -12,7 +12,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,16 +34,15 @@ public class Pedido{
 	@NotNull
 	@Enumerated(value = EnumType.STRING)
 	private PedidoStatus pedidoStatus;
+	@NotBlank
+	@Size(message = "Campo descrição pedido não pode estar vazio", max = 255, min = 3)
+	private String descricao;
 	private LocalDateTime momentoDoPedido;
 
 	public Pedido(UUID idCliente, PedidoRequest pedidoRequest) {
 		this.idCliente = idCliente;
 		this.pedidoStatus = PedidoStatus.PENDENTE;
-		this.momentoDoPedido = LocalDateTime.now();
-	}
-	
-	public Pedido(PedidoRequest pedidoRequest) {
-		this.pedidoStatus = PedidoStatus.PENDENTE;
+		this.descricao = pedidoRequest.getDescricao();
 		this.momentoDoPedido = LocalDateTime.now();
 	}
 

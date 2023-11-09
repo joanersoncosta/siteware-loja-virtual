@@ -15,12 +15,14 @@ public class PedidoClienteListResponse {
 	private UUID idPedido;
 	private UUID idCliente;
 	private PedidoStatus pedidoStatus;
+	private String descricao;
 	private LocalDateTime momentoDoPedido;
 	
 	public PedidoClienteListResponse(Pedido pedido) {
 		this.idPedido = pedido.getIdPedido();
 		this.idCliente = pedido.getIdCliente();
 		this.pedidoStatus = pedido.getPedidoStatus();
+		this.descricao = pedido.getDescricao();
 		this.momentoDoPedido = pedido.getMomentoDoPedido();
 	}
 	public static List<PedidoClienteListResponse> converte(List<Pedido> enderecosDaPessoa) {
