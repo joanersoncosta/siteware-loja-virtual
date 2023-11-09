@@ -55,7 +55,8 @@ public class PedidoApplicationService implements PedidoService {
 	public void deletePedidoPorId(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] PedidoApplicationService - deletePedidoPorId");
 		clienteServicce.buscaClientePorId(idCliente);	
-		
+		Pedido pedido = pedidoRepository.buscaPedidoPorId(idPedido).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
+		pedidoRepository.deletePedidoPorId(pedido);
 		log.info("[finaliza] PedidoApplicationService - deletePedidoPorId");
 	}
 

@@ -10,5 +10,5 @@ public interface PedidoRepository {
 	Pedido salvaPedido(Pedido pedido);
 	Optional<Pedido> buscaPedidoPorId(UUID idPedido);
 	List<Pedido> buscaTodosPedidosPorId();
-
+	void deletePedidoPorId(Pedido pedido);
 }

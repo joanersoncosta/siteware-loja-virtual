@@ -27,17 +27,25 @@ public class PedidoInfraRepository implements PedidoRepository {
 
 	@Override
 	public Optional<Pedido> buscaPedidoPorId(UUID idPedido) {
-		log.info("[inicia] PedidoInfraRepository - salvaPedido");
+		log.info("[inicia] PedidoInfraRepository - buscaPedidoPorId");
 		Optional<Pedido> pedido = PedidoSpringDataJPARepository.findById(idPedido);
-		log.info("[finaliza] PedidoInfraRepository - salvaPedido");
+		log.info("[finaliza] PedidoInfraRepository - buscaPedidoPorId");
 		return pedido;
 	}
 
 	@Override
 	public List<Pedido> buscaTodosPedidosPorId() {
-		log.info("[inicia] PedidoInfraRepository - salvaPedido");
+		log.info("[inicia] PedidoInfraRepository - buscaTodosPedidosPorId");
 		List<Pedido> pedidos = PedidoSpringDataJPARepository.findAll();
-		log.info("[finaliza] PedidoInfraRepository - salvaPedido");
+		log.info("[finaliza] PedidoInfraRepository - buscaTodosPedidosPorId");
 			return pedidos;
+	}
+
+	@Override
+	public void deletePedidoPorId(Pedido pedido) {
+		log.info("[inicia] PedidoInfraRepository - deletePedidoPorId");
+		PedidoSpringDataJPARepository.delete(pedido);
+		log.info("[finaliza] PedidoInfraRepository - deletePedidoPorId");
+		
 	}
 }
