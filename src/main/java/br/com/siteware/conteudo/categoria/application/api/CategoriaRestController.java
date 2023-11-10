@@ -2,6 +2,7 @@ package br.com.siteware.conteudo.categoria.application.api;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.siteware.conteudo.categoria.application.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -9,12 +10,14 @@ import lombok.extern.log4j.Log4j2;
 @RestController
 @Log4j2
 public class CategoriaRestController implements CategoriaAPI {
-
+	private final CategoriaService CategoriaService;
+	
 	@Override
 	public CategoriaIdResponse postCategoria(CategoriaRequest CategoriaRequest) {
 		log.info("[inicia] CategoriaRestController - postCategoria");
+		CategoriaIdResponse categoriaIdResponse = CategoriaService.salvaCategoria(CategoriaRequest);
 		log.info("[finaliza] CategoriaRestController - postCategoria");
-		return null;
+		return categoriaIdResponse;
 	}
 
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/v1/categoria")
 public interface CategoriaAPI {
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
