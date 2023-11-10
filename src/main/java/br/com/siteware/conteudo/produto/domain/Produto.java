@@ -52,5 +52,9 @@ public class Produto{
 		this.preco = produtoAlteracaoRequest.getPreco();
 		this.quantidade = produtoAlteracaoRequest.getQuantidade();		
 	}
-
+	
+	public Double getSubTotal() {
+		return preco * quantidade;
+	}
+	
 }

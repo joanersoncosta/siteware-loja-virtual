@@ -13,6 +13,7 @@ public class ProdutoDetalhadoResponse {
 	private String descricao;
 	private Double preco;
 	private Integer quantidade;
+	private Double subTotal;
 
 	public ProdutoDetalhadoResponse(Produto produro) {
 		this.idProduto = produro.getIdProduto();
@@ -21,6 +22,7 @@ public class ProdutoDetalhadoResponse {
 		this.descricao = produro.getDescricao();
 		this.preco = produro.getPreco();
 		this.quantidade = produro.getQuantidade();
+		this.subTotal = produro.getSubTotal();
 	}
-
+	
 }
