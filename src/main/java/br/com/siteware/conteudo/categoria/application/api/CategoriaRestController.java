@@ -1,10 +1,12 @@
 package br.com.siteware.conteudo.categoria.application.api;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.siteware.conteudo.categoria.application.service.CategoriaService;
+import br.com.siteware.conteudo.cliente.application.api.ClienteDetalhadoResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -27,6 +29,13 @@ public class CategoriaRestController implements CategoriaAPI {
 		log.info("[inicia] CategoriaRestController - buscaTodasCategorias");
 		List<CategoriaListResponse> categorias = CategoriaService.buscaTodasCategorias();
 		log.info("[finaliza] CategoriaRestController - buscaTodasCategorias");
+		return null;
+	}
+
+	@Override
+	public CategoriaDetalhadoResponse getBuscaCategoriaPorId(UUID idCategoria) {
+		log.info("[inicia] CategoriaRestController - getBuscaCategoriaPorId");
+		log.info("[finaliza] CategoriaRestController - getBuscaCategoriaPorId");
 		return null;
 	}
 
