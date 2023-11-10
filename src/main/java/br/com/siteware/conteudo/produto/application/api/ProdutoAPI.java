@@ -31,7 +31,7 @@ public interface ProdutoAPI {
 
 	@GetMapping(path = "/produto")
 	@ResponseStatus(value = HttpStatus.OK)
-	List<ProdutoPedidoListResponse> buscaTodosProdutos(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
+	List<ProdutoCategoriaListResponse> buscaTodosProdutos(@PathVariable(value = "idCategoria") UUID idCategoria);
 
 	@DeleteMapping(path = "/produto/{idProduto}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)

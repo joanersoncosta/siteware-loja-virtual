@@ -13,7 +13,7 @@ import br.com.siteware.conteudo.pedido.application.service.PedidoService;
 import br.com.siteware.conteudo.produto.application.api.ProdutoAlteracaoRequest;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoIdResponse;
-import br.com.siteware.conteudo.produto.application.api.ProdutoPedidoListResponse;
+import br.com.siteware.conteudo.produto.application.api.ProdutoCategoriaListResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoRequest;
 import br.com.siteware.conteudo.produto.application.repository.ProdutoRepository;
 import br.com.siteware.conteudo.produto.domain.Produto;
@@ -47,12 +47,12 @@ public class ProdutoApplicationService implements ProdutoService {
 	}
 
 	@Override
-	public List<ProdutoPedidoListResponse> buscaTodosProdutos(UUID idCliente, UUID idPedido) {
+	public List<ProdutoCategoriaListResponse> buscaTodosProdutos(UUID idCategoria) {
 		log.info("[inicia] ProdutoRestController - buscaTodosProdutos");
-		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		categoriaService.buscaCategoriaPorId(idCategoria);
 		List<Produto>  produtos = produtoRepository.buscaTodosProdutos();
 		log.info("[finaliza] ProdutoRestController - buscaTodosProdutos");
-		return ProdutoPedidoListResponse.converte(produtos);
+		return ProdutoCategoriaListResponse.converte(produtos);
 	}
 
 	@Override

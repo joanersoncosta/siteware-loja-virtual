@@ -8,7 +8,7 @@ import br.com.siteware.conteudo.produto.domain.Produto;
 import lombok.Value;
 
 @Value
-public class ProdutoPedidoListResponse {
+public class ProdutoCategoriaListResponse {
 	private UUID idProduto;
 	private String nome;
 	private String descricao;
@@ -16,7 +16,7 @@ public class ProdutoPedidoListResponse {
 	private Integer quantidade;
 	private Double subTotal;
 
-	public ProdutoPedidoListResponse(Produto produro) {
+	public ProdutoCategoriaListResponse(Produto produro) {
 		this.idProduto = produro.getIdProduto();
 		this.nome = produro.getNome();
 		this.descricao = produro.getDescricao();
@@ -25,10 +25,10 @@ public class ProdutoPedidoListResponse {
 		this.subTotal = produro.getSubTotal();
 	}
 	
-	public static List<ProdutoPedidoListResponse> converte(List<Produto> produtos) {
+	public static List<ProdutoCategoriaListResponse> converte(List<Produto> produtos) {
 		return produtos
 				.stream()
-				.map(ProdutoPedidoListResponse::new)
+				.map(ProdutoCategoriaListResponse::new)
 				.collect(Collectors.toList());
 	}
 
