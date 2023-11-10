@@ -25,6 +25,7 @@ public class CategoriaRestController implements CategoriaAPI {
 	@Override
 	public List<CategoriaListResponse> buscaTodasCategorias() {
 		log.info("[inicia] CategoriaRestController - buscaTodasCategorias");
+		List<CategoriaListResponse> categorias = CategoriaService.buscaTodasCategorias();
 		log.info("[finaliza] CategoriaRestController - buscaTodasCategorias");
 		return null;
 	}
