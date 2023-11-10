@@ -29,7 +29,7 @@ public class CategoriaRestController implements CategoriaAPI {
 		log.info("[inicia] CategoriaRestController - buscaTodasCategorias");
 		List<CategoriaListResponse> categorias = CategoriaService.buscaTodasCategorias();
 		log.info("[finaliza] CategoriaRestController - buscaTodasCategorias");
-		return null;
+		return categorias;
 	}
 
 	@Override
@@ -38,6 +38,14 @@ public class CategoriaRestController implements CategoriaAPI {
 		CategoriaDetalhadoResponse CategoriaDetalhadoResponse = CategoriaService.buscaCategoriaPorId(idCategoria);
 		log.info("[finaliza] CategoriaRestController - getBuscaCategoriaPorId");
 		return CategoriaDetalhadoResponse;
+	}
+
+	@Override
+	public void deletaCategoriaPorId(UUID idCategoria) {
+		log.info("[inicia] CategoriaRestController - getBuscaCategoriaPorId");
+		log.info("[idCategoria] {}", idCategoria);
+		log.info("[finaliza] CategoriaRestController - getBuscaCategoriaPorId");
+		
 	}
 
 }
