@@ -30,7 +30,7 @@ public class Pedido{
 	@Column(columnDefinition = "uuid", name = "idPedido", updatable = false, unique = true, nullable = false)
 	private UUID idPedido;
 	@NotNull
-	@Column(columnDefinition = "uuid", name = "idCliente", nullable = false)
+	@Column(columnDefinition = "uuid", name = "idCliente", nullable = false, unique = true)
 	private UUID idCliente;
 	@NotNull
 	@Enumerated(value = EnumType.STRING)

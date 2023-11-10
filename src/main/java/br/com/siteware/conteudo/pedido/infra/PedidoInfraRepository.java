@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
+import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.repository.PedidoRepository;
 import br.com.siteware.conteudo.pedido.domain.Pedido;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +23,11 @@ public class PedidoInfraRepository implements PedidoRepository {
 	@Override
 	public Pedido salvaPedido(Pedido pedido) {
 		log.info("[inicia] PedidoInfraRepository - salvaPedido");
-		PedidoSpringDataJPARepository.save(pedido);
+		try {
+			PedidoSpringDataJPARepository.save(pedido);
+		}catch (DataIntegrityViolationException ex) {
+			throw APIException.build(HttpStatus.BAD_REQUEST, "Pedido já cadastrada");
+		}
 		log.info("[finaliza] PedidoInfraRepository - salvaPedido");
 		return pedido;
 	}

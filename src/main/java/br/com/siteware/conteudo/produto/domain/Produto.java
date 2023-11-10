@@ -31,6 +31,7 @@ public class Produto{
 	@Column(columnDefinition = "uuid", name = "idCategoria", nullable = false)
 	private UUID idCategoria;
 	@NotNull
+	@Column(unique = true)
 	private String nome;
 	@NotBlank
 	@Size(message = "Campo descrição produto não pode estar vazio", max = 255, min = 3)

@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import br.com.siteware.conteudo.cliente.application.repository.ClientRepository;
 import br.com.siteware.conteudo.cliente.domain.Cliente;
+import br.com.siteware.conteudo.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -20,7 +23,11 @@ public class ClienteInfraRepository implements ClientRepository {
 	@Override
 	public Cliente salvaCliente(Cliente cliente) {
 		log.info("[inicia] ClienteInfraRepository - postCliente");
-		clientSpringDataJPARepository.save(cliente);
+		try {
+			clientSpringDataJPARepository.save(cliente);
+		}catch (DataIntegrityViolationException ex) {
+			throw APIException.build(HttpStatus.BAD_REQUEST, "Cliente já cadastrada");
+		}
 		log.info("[finaliza] ClienteInfraRepository - postCliente");
 		return cliente;
 	}
