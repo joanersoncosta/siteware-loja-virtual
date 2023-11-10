@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
+import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.produto.application.repository.ProdutoRepository;
 import br.com.siteware.conteudo.produto.domain.Produto;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +23,12 @@ public class ProdutoInfraRepository implements ProdutoRepository {
 	@Override
 	public Produto salvaProduto(Produto produto) {
 		log.info("[inicia] ProdutoInfraRepository - salvaProduto");
-		produtoSpringDataJPARepository.save(produto);
+		log.info("[inicia] CategoriaInfraRepository - salvaCategoria");
+		try {
+			produtoSpringDataJPARepository.save(produto);
+		}catch (DataIntegrityViolationException ex) {
+			throw APIException.build(HttpStatus.BAD_REQUEST, "Produto já cadastrada");
+		}
 		log.info("[finaliza] ProdutoInfraRepository - salvaProduto");
 		return produto;
 	}
