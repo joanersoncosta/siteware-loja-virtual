@@ -45,5 +45,4 @@ public class Produto{
 		this.quantidade = produtoRequest.getQuantidade();
 	}
 
-	
 }
