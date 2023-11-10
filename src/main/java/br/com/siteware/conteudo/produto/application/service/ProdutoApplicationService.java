@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import br.com.siteware.conteudo.categoria.application.api.CategoriaDetalhadoResponse;
+import br.com.siteware.conteudo.categoria.application.service.CategoriaService;
 import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
 import br.com.siteware.conteudo.produto.application.api.ProdutoAlteracaoRequest;
@@ -24,12 +26,13 @@ import lombok.extern.log4j.Log4j2;
 public class ProdutoApplicationService implements ProdutoService {
 	private final ProdutoRepository produtoRepository; 
 	private final PedidoService pedidoService; 
+	private final CategoriaService categoriaService;
 
 	@Override
-	public ProdutoIdResponse salvaProduto(UUID idCliente, UUID idPedido, ProdutoRequest produtoRequest) {
+	public ProdutoIdResponse salvaProduto(UUID idCategoria, ProdutoRequest produtoRequest) {
 		log.info("[inicia] ProdutoRestController - postProduto");
-		pedidoService.buscaPedidoPorId(idCliente, idPedido);
-		Produto produto = produtoRepository.salvaProduto(new Produto(idPedido, produtoRequest));
+		categoriaService.buscaCategoriaPorId(idCategoria);
+		Produto produto = produtoRepository.salvaProduto(new Produto(idCategoria, produtoRequest));
 		log.info("[finaliza] ProdutoRestController - postProduto");
 		return ProdutoIdResponse.builder().idProduto(produto.getIdProduto()).build();
 	}

@@ -10,7 +10,7 @@ import br.com.siteware.conteudo.produto.application.api.ProdutoPedidoListRespons
 import br.com.siteware.conteudo.produto.application.api.ProdutoRequest;
 
 public interface ProdutoService {
-	ProdutoIdResponse salvaProduto(UUID idCliente, UUID idPedido, ProdutoRequest produtoRequest);
+	ProdutoIdResponse salvaProduto(UUID idCategoria, ProdutoRequest produtoRequest);
 	ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto);
 	List<ProdutoPedidoListResponse> buscaTodosProdutos(UUID idCliente, UUID idPedido);
 	void deleteProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto);

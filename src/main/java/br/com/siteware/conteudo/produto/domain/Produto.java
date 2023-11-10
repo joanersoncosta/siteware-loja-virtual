@@ -2,6 +2,8 @@ package br.com.siteware.conteudo.produto.domain;
 
 import java.util.UUID;
 
+import br.com.siteware.conteudo.categoria.application.api.CategoriaDetalhadoResponse;
+import br.com.siteware.conteudo.categoria.domain.Categoria;
 import br.com.siteware.conteudo.produto.application.api.ProdutoAlteracaoRequest;
 import br.com.siteware.conteudo.produto.application.api.ProdutoRequest;
 import jakarta.persistence.Column;
@@ -26,8 +28,8 @@ public class Produto{
 	@Column(columnDefinition = "uuid", name = "idProduto", updatable = false, unique = true, nullable = false)
 	private UUID idProduto;
 	@NotNull
-	@Column(columnDefinition = "uuid", name = "idPedido", nullable = false)
-	private UUID idPedido;
+	@Column(columnDefinition = "uuid", name = "idCategoria", nullable = false)
+	private UUID idCategoria;
 	@NotNull
 	private String nome;
 	@NotBlank
@@ -38,8 +40,8 @@ public class Produto{
 	@NotNull
 	private Integer quantidade;
 	
-	public Produto(UUID idPedido, ProdutoRequest produtoRequest) {
-		this.idPedido = idPedido;
+	public Produto(UUID idCategoria, ProdutoRequest produtoRequest) {
+		this.idCategoria = idCategoria;
 		this.nome = produtoRequest.getNome();
 		this.descricao = produtoRequest.getDescricao();
 		this.preco = produtoRequest.getPreco();

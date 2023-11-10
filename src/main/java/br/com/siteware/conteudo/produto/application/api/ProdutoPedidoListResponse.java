@@ -10,7 +10,6 @@ import lombok.Value;
 @Value
 public class ProdutoPedidoListResponse {
 	private UUID idProduto;
-	private UUID idPedido;
 	private String nome;
 	private String descricao;
 	private Double preco;
@@ -19,7 +18,6 @@ public class ProdutoPedidoListResponse {
 
 	public ProdutoPedidoListResponse(Produto produro) {
 		this.idProduto = produro.getIdProduto();
-		this.idPedido = produro.getIdPedido();
 		this.nome = produro.getNome();
 		this.descricao = produro.getDescricao();
 		this.preco = produro.getPreco();

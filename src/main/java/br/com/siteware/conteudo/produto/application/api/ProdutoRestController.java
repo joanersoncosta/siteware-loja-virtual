@@ -17,10 +17,10 @@ public class ProdutoRestController implements ProdutoAPI {
 	private final ProdutoService produtoService;
 	
 	@Override
-	public ProdutoIdResponse postProduto(UUID idCliente, UUID idPedido, ProdutoRequest produtoRequest) {
+	public ProdutoIdResponse postProduto(UUID idCategoria, ProdutoRequest produtoRequest) {
 		log.info("[inicia] ProdutoRestController - postProduto");
-		log.info("[idCliente] {}, [idPedido] {}", idCliente, idPedido);
-		ProdutoIdResponse produtoIdResponse = produtoService.salvaProduto(idCliente, idPedido, produtoRequest);
+		log.info("[idCategoria] {}", idCategoria);
+		ProdutoIdResponse produtoIdResponse = produtoService.salvaProduto(idCategoria, produtoRequest);
 		log.info("[finaliza] ProdutoRestController - postProduto");
 		return produtoIdResponse;
 	}
