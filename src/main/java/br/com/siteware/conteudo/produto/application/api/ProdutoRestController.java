@@ -26,10 +26,10 @@ public class ProdutoRestController implements ProdutoAPI {
 	}
 
 	@Override
-	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
+	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCategoria, UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
-		log.info("[idCliente] {}, [idPedido] {}, [idProduto] {}", idCliente, idPedido, idProduto);
-		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idCliente, idPedido, idProduto);
+		log.info("[idCategoria] {}, [idProduto] {}", idCategoria, idProduto);
+		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idCategoria, idProduto);
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
 		return produtoDetalhadoResponse;
 	}
@@ -44,10 +44,10 @@ public class ProdutoRestController implements ProdutoAPI {
 	}
 
 	@Override
-	public void deleteProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
+	public void deleteProdutoPorId(UUID idCategoria, UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - deleteProdutoPorId");
-		log.info("[idCliente] {}, [idPedido] {}, [idProduto] {}", idCliente, idPedido, idProduto);
-		produtoService.deleteProdutoPorId(idCliente, idPedido, idProduto);
+		log.info("[idCategoria] {}, [idProduto] {}", idCategoria, idProduto);
+		produtoService.deleteProdutoPorId(idCategoria, idProduto);
 		log.info("[finaliza] ProdutoRestController - deleteProdutoPorId");
 		
 	}

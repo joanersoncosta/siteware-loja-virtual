@@ -27,7 +27,7 @@ public interface ProdutoAPI {
 
 	@GetMapping(path = "/produto/{idProduto}")
 	@ResponseStatus(value = HttpStatus.OK)
-	ProdutoDetalhadoResponse buscaProdutoPorId(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idProduto") UUID idProduto);
+	ProdutoDetalhadoResponse buscaProdutoPorId(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
 
 	@GetMapping(path = "/produto")
 	@ResponseStatus(value = HttpStatus.OK)
@@ -35,7 +35,7 @@ public interface ProdutoAPI {
 
 	@DeleteMapping(path = "/produto/{idProduto}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	void deleteProdutoPorId(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idProduto") UUID idProduto);
+	void deleteProdutoPorId(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
 	
 	@PatchMapping(value = "/produto/{idProduto}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)

@@ -38,9 +38,9 @@ public class ProdutoApplicationService implements ProdutoService {
 	}
 
 	@Override
-	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
+	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCategoria, UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
-		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		categoriaService.buscaCategoriaPorId(idCategoria);
 		Produto produto = produtoRepository.buscaProdutoPorId(idProduto).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
 		return new ProdutoDetalhadoResponse(produto);
@@ -56,9 +56,9 @@ public class ProdutoApplicationService implements ProdutoService {
 	}
 
 	@Override
-	public void deleteProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
+	public void deleteProdutoPorId(UUID idCategoria, UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - deleteProdutoPorId");
-		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		categoriaService.buscaCategoriaPorId(idCategoria);
 		Produto produto = produtoRepository.buscaProdutoPorId(idProduto).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		produtoRepository.deleteProdutoPorId(produto);
 		log.info("[finaliza] ProdutoRestController - deleteProdutoPorId");
