@@ -42,4 +42,12 @@ public class ProdutoRestController implements ProdutoAPI {
 		return produtoPedidoListResponse;
 	}
 
+	@Override
+	public void deleteProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
+		log.info("[inicia] ProdutoRestController - deleteProdutoPorId");
+		log.info("[idCliente] {}, [idPedido] {}", idCliente, idPedido);
+		log.info("[finaliza] ProdutoRestController - deleteProdutoPorId");
+		
+	}
+
 }
