@@ -1,5 +1,6 @@
 package br.com.siteware.conteudo.produto.application.api;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +31,14 @@ public class ProdutoRestController implements ProdutoAPI {
 		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idCliente, idPedido, idProduto);
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
 		return produtoDetalhadoResponse;
+	}
+
+	@Override
+	public List<ProdutoPedidoListResponse> buscaTodosProdutos(UUID idCliente, UUID idPedido) {
+		log.info("[inicia] ProdutoRestController - buscaTodosProdutos");
+		log.info("[idCliente] {}, [idPedido] {}", idCliente, idPedido);
+		log.info("[finaliza] ProdutoRestController - buscaTodosProdutos");
+		return null;
 	}
 
 }

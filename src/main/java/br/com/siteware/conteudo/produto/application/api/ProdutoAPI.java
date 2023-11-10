@@ -1,5 +1,6 @@
 package br.com.siteware.conteudo.produto.application.api;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.siteware.conteudo.pedido.application.api.PedidoClienteListResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import jakarta.validation.Valid;
 
@@ -25,5 +27,9 @@ public interface ProdutoAPI {
 	@GetMapping(path = "/produto/{idProduto}")
 	@ResponseStatus(value = HttpStatus.OK)
 	ProdutoDetalhadoResponse buscaProdutoPorId(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idProduto") UUID idProduto);
+
+	@GetMapping(path = "/produto")
+	@ResponseStatus(value = HttpStatus.OK)
+	List<ProdutoPedidoListResponse> buscaTodosProdutos(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
 
 }

@@ -1,5 +1,6 @@
 package br.com.siteware.conteudo.produto.application.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoIdResponse;
+import br.com.siteware.conteudo.produto.application.api.ProdutoPedidoListResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoRequest;
 import br.com.siteware.conteudo.produto.application.repository.ProdutoRepository;
 import br.com.siteware.conteudo.produto.domain.Produto;
@@ -39,5 +41,6 @@ public class ProdutoApplicationService implements ProdutoService {
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
 		return new ProdutoDetalhadoResponse(produto);
 	}
+
 
 }
