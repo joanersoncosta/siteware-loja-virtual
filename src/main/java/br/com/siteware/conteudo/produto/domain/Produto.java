@@ -35,28 +35,16 @@ public class Produto{
 	@NotBlank
 	@Size(message = "Campo descrição produto não pode estar vazio", max = 255, min = 3)
 	private String descricao;
-	@NotNull
-	private Double preco;
-	@NotNull
-	private Integer quantidade;
 	
 	public Produto(UUID idCategoria, ProdutoRequest produtoRequest) {
 		this.idCategoria = idCategoria;
 		this.nome = produtoRequest.getNome();
 		this.descricao = produtoRequest.getDescricao();
-		this.preco = produtoRequest.getPreco();
-		this.quantidade = produtoRequest.getQuantidade();
 	}
 
 	public void altera(ProdutoAlteracaoRequest produtoAlteracaoRequest) {
 		this.nome = produtoAlteracaoRequest.getNome();
 		this.descricao = produtoAlteracaoRequest.getDescricao();
-		this.preco = produtoAlteracaoRequest.getPreco();
-		this.quantidade = produtoAlteracaoRequest.getQuantidade();		
-	}
-	
-	public Double getSubTotal() {
-		return preco * quantidade;
 	}
 	
 }

@@ -11,18 +11,12 @@ public class ProdutoDetalhadoResponse {
 	private UUID idCategoria;
 	private String nome;
 	private String descricao;
-	private Double preco;
-	private Integer quantidade;
-	private Double subTotal;
 
 	public ProdutoDetalhadoResponse(Produto produro) {
 		this.idProduto = produro.getIdProduto();
 		this.idCategoria = produro.getIdCategoria();
 		this.nome = produro.getNome();
 		this.descricao = produro.getDescricao();
-		this.preco = produro.getPreco();
-		this.quantidade = produro.getQuantidade();
-		this.subTotal = produro.getSubTotal();
 	}
 	
 }
