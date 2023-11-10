@@ -45,10 +45,10 @@ public class ProdutoApplicationService implements ProdutoService {
 	@Override
 	public List<ProdutoPedidoListResponse> buscaTodosProdutos(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] ProdutoRestController - buscaTodosProdutos");
-		pedidoService.buscaPedidoPorId(idCliente, idCliente);
+		pedidoService.buscaPedidoPorId(idCliente, idPedido);
 		List<Produto>  produtos = produtoRepository.buscaTodosProdutos();
 		log.info("[finaliza] ProdutoRestController - buscaTodosProdutos");
-		return null;
+		return ProdutoPedidoListResponse.converte(produtos);
 	}
 
 }
