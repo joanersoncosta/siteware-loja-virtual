@@ -6,7 +6,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoIdResponse;
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
+import br.com.siteware.conteudo.carrinho.application.repository.ProdutoCarrinhoRepository;
+import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
+import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -15,16 +18,19 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @Log4j2
 public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService {
-	private final PedidoService pedidoService; 
 	private final ProdutoService produtoService;
-
+	private final ProdutoCarrinhoRepository produtoCarrinhoRepository;
+	private final PedidoService pedidoService;
+	
 	@Override
-	public ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idPedido, UUID idProduto,
+	public ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idProduto, UUID idCategoria,
 			ProdutoCarrinhoRequest produtoRequest) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
-		
+		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idCategoria, idProduto);
+		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.adicionaProdutoCarrinho(new CarrinhoProduto(idProduto, idCategoria, produtoDetalhadoResponse, produtoRequest));
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
-		return null;
+		return ProdutoCarrinhoIdResponse.builder().idCarrinhoProduto(carrinhoProduto.getIdCarrinhoProduto()).build();
 	}
 
 }

@@ -14,6 +14,5 @@ public class ProdutoAlteracaoRequest {
 	private String descricao;
 	@NotNull
 	private Double preco;
-	@NotNull
-	private Integer quantidade;
+
 }

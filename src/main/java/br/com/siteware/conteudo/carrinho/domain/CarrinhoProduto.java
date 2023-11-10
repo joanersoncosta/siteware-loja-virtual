@@ -2,10 +2,10 @@ package br.com.siteware.conteudo.carrinho.domain;
 
 import java.util.UUID;
 
+import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
+import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -20,13 +20,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "carrinho_produto")
 public class CarrinhoProduto {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idCarrinhoProduto", updatable = false, unique = true, nullable = false)
 	private UUID idCarrinhoProduto;
 	@NotNull
-	@Column(columnDefinition = "uuid", name = "idProduto", nullable = false, unique = true)
-	private UUID idProduto;
+	@Column(columnDefinition = "uuid", name = "idCategoria", nullable = false)
+	private UUID idCategoria;
 	@NotNull
 	@Column(unique = true)
 	private String nome;
@@ -37,15 +37,14 @@ public class CarrinhoProduto {
 	private Integer quantidade;
 	private Double subTotal;
 	
-	public CarrinhoProduto(UUID idCarrinhoProduto, @NotNull UUID idProduto, @NotNull String nome,
-			@NotBlank @Size(message = "Campo descrição produto não pode estar vazio", max = 255, min = 3) String descricao,
-			Double preco, Integer quantidade, Double subTotal) {
+	public CarrinhoProduto(UUID idProduto, UUID idCategoria, ProdutoDetalhadoResponse produtoDetalhadoResponse,
+			ProdutoCarrinhoRequest produtoRequest) {
 		this.idCarrinhoProduto = idProduto;
-		this.idProduto = idProduto;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.preco = preco;
-		this.quantidade = quantidade;
-		this.subTotal = subTotal;
+		this.idCategoria = idCategoria;
+		this.nome = produtoDetalhadoResponse.getNome();
+		this.descricao = produtoDetalhadoResponse.getDescricao();
+		this.preco = produtoDetalhadoResponse.getPreco();
+		this.quantidade = produtoRequest.getQuantidade();
+		this.subTotal = 0.0;
 	}
 }
