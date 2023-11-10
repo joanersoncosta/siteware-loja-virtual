@@ -29,8 +29,9 @@ public class CategoriaApplicationService implements CategoriaService {
 	@Override
 	public List<CategoriaListResponse> buscaTodasCategorias() {
 		log.info("[inicia] CategoriaApplicationService - buscaTodasCategorias");
+		List<Categoria> categorias = categoriaRepository.buscaTodasCategorias();
 		log.info("[finaliza] CategoriaApplicationService - buscaTodasCategorias");
-		return null;
+		return CategoriaListResponse.converte(categorias);
 	}
 
 }
