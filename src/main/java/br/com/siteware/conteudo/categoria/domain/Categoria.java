@@ -25,6 +25,7 @@ public class Categoria {
 	private UUID idCategoria;
 	@NotBlank
 	@Size(message = "Campo nome da categoria não pode estar vazio", max = 50, min = 3)
+	@Column(unique = true)
 	private String nome;
 	
 	public Categoria(CategoriaRequest categoriaRequest) {

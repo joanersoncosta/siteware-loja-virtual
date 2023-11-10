@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import br.com.siteware.conteudo.categoria.application.repository.CategoriaRepository;
 import br.com.siteware.conteudo.categoria.domain.Categoria;
+import br.com.siteware.conteudo.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -20,7 +23,11 @@ public class CategoriaInfraRepository implements CategoriaRepository {
 	@Override
 	public Categoria salvaCategoria(Categoria categoria) {
 		log.info("[inicia] CategoriaInfraRepository - salvaCategoria");
-		categoriaSpringDataJPARepository.save(categoria);
+		try {
+			categoriaSpringDataJPARepository.save(categoria);
+		}catch (DataIntegrityViolationException ex) {
+			throw APIException.build(HttpStatus.BAD_REQUEST, "Categoria já cadastrada");
+		}
 		log.info("[finaliza] CategoriaInfraRepository - salvaCategoria");
 		return categoria;
 	}
