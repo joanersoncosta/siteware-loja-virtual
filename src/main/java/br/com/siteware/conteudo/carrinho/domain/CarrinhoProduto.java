@@ -48,6 +48,4 @@ public class CarrinhoProduto {
 		this.quantidade = quantidade;
 		this.subTotal = subTotal;
 	}
-	
-	
 }
