@@ -35,8 +35,9 @@ public class ProdutoApplicationService implements ProdutoService {
 	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
 		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		Produto produto = produtoRepository.buscaProdutoPorId(idProduto).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
-		return null;
+		return new ProdutoDetalhadoResponse(produto);
 	}
 
 }

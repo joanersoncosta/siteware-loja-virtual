@@ -24,4 +24,12 @@ public class ProdutoInfraRepository implements ProdutoRepository {
 		return produto;
 	}
 
+	@Override
+	public Optional<Produto> buscaProdutoPorId(UUID idProduto) {
+		log.info("[inicia] ProdutoInfraRepository - buscaProdutoPorId");
+		Optional<Produto> produto = produtoSpringDataJPARepository.findById(idProduto);
+		log.info("[finaliza] ProdutoInfraRepository - buscaProdutoPorId");
+		return produto;
+	}
+
 }
