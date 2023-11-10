@@ -35,8 +35,9 @@ public class CategoriaRestController implements CategoriaAPI {
 	@Override
 	public CategoriaDetalhadoResponse getBuscaCategoriaPorId(UUID idCategoria) {
 		log.info("[inicia] CategoriaRestController - getBuscaCategoriaPorId");
+		CategoriaDetalhadoResponse CategoriaDetalhadoResponse = CategoriaService.buscaCategoriaPorId(idCategoria);
 		log.info("[finaliza] CategoriaRestController - getBuscaCategoriaPorId");
-		return null;
+		return CategoriaDetalhadoResponse;
 	}
 
 }
