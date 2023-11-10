@@ -56,6 +56,7 @@ public class ProdutoRestController implements ProdutoAPI {
 	public void patchPedido(UUID idCliente, UUID idPedido, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest) {
 		log.info("[inicia] ProdutoRestController - patchPedido");
 		log.info("[idCliente] {}, [idPedido] {}, [idProduto] {}", idCliente, idPedido, idProduto);
+		produtoService.alteraProduto(idCliente, idPedido, idProduto, produtoAlteracaoRequest);
 		log.info("[finaliza] ProdutoRestController - patchPedido");
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
+import br.com.siteware.conteudo.produto.application.api.ProdutoAlteracaoRequest;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoIdResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoPedidoListResponse;
@@ -60,5 +61,12 @@ public class ProdutoApplicationService implements ProdutoService {
 		log.info("[finaliza] ProdutoRestController - deleteProdutoPorId");
 	}
 
+	@Override
+	public void alteraProduto(UUID idCliente, UUID idPedido, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest) {
+		log.info("[inicia] ProdutoRestController - alteraProduto");
+		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		log.info("[finaliza] ProdutoRestController - alteraProduto");
+		
+	}
 
 }
