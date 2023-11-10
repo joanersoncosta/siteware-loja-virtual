@@ -1,6 +1,8 @@
 package br.com.siteware.conteudo.categoria.infra;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
 
@@ -29,6 +31,14 @@ public class CategoriaInfraRepository implements CategoriaRepository {
 		List<Categoria> categorias = categoriaSpringDataJPARepository.findAll();
 		log.info("[finaliza] CategoriaInfraRepository - buscaTodasCategorias");
 		return categorias;
+	}
+
+	@Override
+	public Optional<Categoria> buscaCategoriaPorId(UUID idCategoria) {
+		log.info("[inicia] CategoriaInfraRepository - buscaTodasCategorias");
+		Optional<Categoria> categoria = categoriaSpringDataJPARepository.findById(idCategoria);
+		log.info("[finaliza] CategoriaInfraRepository - buscaTodasCategorias");
+		return categoria;
 	}
 
 }
