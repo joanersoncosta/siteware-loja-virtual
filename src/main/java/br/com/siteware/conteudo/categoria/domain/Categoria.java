@@ -2,6 +2,7 @@ package br.com.siteware.conteudo.categoria.domain;
 
 import java.util.UUID;
 
+import br.com.siteware.conteudo.categoria.application.api.CategoriaRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,5 +26,9 @@ public class Categoria {
 	@NotBlank
 	@Size(message = "Campo nome da categoria não pode estar vazio", max = 50, min = 3)
 	private String nome;
+	
+	public Categoria(CategoriaRequest categoriaRequest) {
+		this.nome = categoriaRequest.getNome();
+	}
 	
 }
