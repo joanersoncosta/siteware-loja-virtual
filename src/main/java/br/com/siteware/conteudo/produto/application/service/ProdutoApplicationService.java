@@ -51,4 +51,11 @@ public class ProdutoApplicationService implements ProdutoService {
 		return ProdutoPedidoListResponse.converte(produtos);
 	}
 
+	@Override
+	public void deleteProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
+		log.info("[inicia] ProdutoRestController - deleteProdutoPorId");
+		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		log.info("[finaliza] ProdutoRestController - deleteProdutoPorId");
+	}
+
 }

@@ -12,5 +12,6 @@ public interface ProdutoService {
 	ProdutoIdResponse salvaProduto(UUID idCliente, UUID idPedido, ProdutoRequest produtoRequest);
 	ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto);
 	List<ProdutoPedidoListResponse> buscaTodosProdutos(UUID idCliente, UUID idPedido);
+	void deleteProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto);
 
 }
