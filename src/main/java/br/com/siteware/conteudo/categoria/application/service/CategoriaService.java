@@ -9,9 +9,9 @@ import br.com.siteware.conteudo.categoria.application.api.CategoriaListResponse;
 import br.com.siteware.conteudo.categoria.application.api.CategoriaRequest;
 
 public interface CategoriaService {
-
 	CategoriaIdResponse salvaCategoria(CategoriaRequest categoriaRequest);
 	List<CategoriaListResponse> buscaTodasCategorias();
 	CategoriaDetalhadoResponse buscaCategoriaPorId(UUID idCategoria);
+	void deletaCategoriaPorId(UUID idCategoria);
 
 }

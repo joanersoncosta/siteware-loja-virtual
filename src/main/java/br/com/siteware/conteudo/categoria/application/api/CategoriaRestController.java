@@ -42,9 +42,10 @@ public class CategoriaRestController implements CategoriaAPI {
 
 	@Override
 	public void deletaCategoriaPorId(UUID idCategoria) {
-		log.info("[inicia] CategoriaRestController - getBuscaCategoriaPorId");
+		log.info("[inicia] CategoriaRestController - deletaCategoriaPorId");
 		log.info("[idCategoria] {}", idCategoria);
-		log.info("[finaliza] CategoriaRestController - getBuscaCategoriaPorId");
+		CategoriaService.deletaCategoriaPorId(idCategoria);
+		log.info("[finaliza] CategoriaRestController - deletaCategoriaPorId");
 		
 	}
 
