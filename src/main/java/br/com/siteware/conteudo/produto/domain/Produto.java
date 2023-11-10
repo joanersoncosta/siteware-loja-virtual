@@ -2,6 +2,7 @@ package br.com.siteware.conteudo.produto.domain;
 
 import java.util.UUID;
 
+import br.com.siteware.conteudo.produto.application.api.ProdutoAlteracaoRequest;
 import br.com.siteware.conteudo.produto.application.api.ProdutoRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,6 +44,13 @@ public class Produto{
 		this.descricao = produtoRequest.getDescricao();
 		this.preco = produtoRequest.getPreco();
 		this.quantidade = produtoRequest.getQuantidade();
+	}
+
+	public void altera(ProdutoAlteracaoRequest produtoAlteracaoRequest) {
+		this.nome = produtoAlteracaoRequest.getNome();
+		this.descricao = produtoAlteracaoRequest.getDescricao();
+		this.preco = produtoAlteracaoRequest.getPreco();
+		this.quantidade = produtoAlteracaoRequest.getQuantidade();		
 	}
 
 }
