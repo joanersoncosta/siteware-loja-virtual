@@ -14,6 +14,6 @@ public interface ProdutoService {
 	ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCategoria, UUID idProduto);
 	List<ProdutoCategoriaListResponse> buscaTodosProdutos(UUID idCategoria);
 	void deleteProdutoPorId(UUID idCategoria, UUID idProduto);
-	void alteraProduto(UUID idCliente, UUID idPedido, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest);
+	void alteraProduto(UUID idCategoria, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest);
 
 }

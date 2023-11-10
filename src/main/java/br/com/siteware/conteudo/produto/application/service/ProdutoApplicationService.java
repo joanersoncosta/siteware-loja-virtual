@@ -65,9 +65,9 @@ public class ProdutoApplicationService implements ProdutoService {
 	}
 
 	@Override
-	public void alteraProduto(UUID idCliente, UUID idPedido, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest) {
+	public void alteraProduto(UUID idCategoria, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest) {
 		log.info("[inicia] ProdutoRestController - alteraProduto");
-		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		categoriaService.buscaCategoriaPorId(idCategoria);
 		Produto produto = produtoRepository.buscaProdutoPorId(idProduto).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		produto.altera(produtoAlteracaoRequest);
 		produtoRepository.salvaProduto(produto);
