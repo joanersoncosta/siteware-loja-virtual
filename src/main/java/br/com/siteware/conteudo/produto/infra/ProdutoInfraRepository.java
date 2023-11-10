@@ -1,5 +1,6 @@
 package br.com.siteware.conteudo.produto.infra;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,6 +31,14 @@ public class ProdutoInfraRepository implements ProdutoRepository {
 		Optional<Produto> produto = produtoSpringDataJPARepository.findById(idProduto);
 		log.info("[finaliza] ProdutoInfraRepository - buscaProdutoPorId");
 		return produto;
+	}
+
+	@Override
+	public List<Produto> buscaTodosProdutos() {
+		log.info("[inicia] ProdutoInfraRepository - buscaTodosProdutos");
+		List<Produto> produtos = produtoSpringDataJPARepository.findAll();
+		log.info("[finaliza] ProdutoInfraRepository - buscaTodosProdutos");
+		return produtos;
 	}
 
 }
