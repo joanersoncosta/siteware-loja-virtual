@@ -27,8 +27,9 @@ public class ProdutoRestController implements ProdutoAPI {
 	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
 		log.info("[idCliente] {}, [idPedido] {}, [idProduto] {}", idCliente, idPedido, idProduto);
+		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idCliente, idPedido, idProduto);
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
-		return null;
+		return produtoDetalhadoResponse;
 	}
 
 }

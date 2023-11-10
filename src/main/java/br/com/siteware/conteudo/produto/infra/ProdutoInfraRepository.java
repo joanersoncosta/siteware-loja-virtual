@@ -1,9 +1,12 @@
-package br.com.siteware.conteudo.produto.application.repository;
+package br.com.siteware.conteudo.produto.infra;
+
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.siteware.conteudo.produto.application.repository.ProdutoRepository;
 import br.com.siteware.conteudo.produto.domain.Produto;
-import br.com.siteware.conteudo.produto.infra.ProdutoSpringDataJPARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 

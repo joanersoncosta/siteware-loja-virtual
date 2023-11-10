@@ -2,9 +2,12 @@ package br.com.siteware.conteudo.produto.application.service;
 
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
+import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoIdResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoRequest;
 import br.com.siteware.conteudo.produto.application.repository.ProdutoRepository;
@@ -22,11 +25,18 @@ public class ProdutoApplicationService implements ProdutoService {
 	@Override
 	public ProdutoIdResponse salvaProduto(UUID idCliente, UUID idPedido, ProdutoRequest produtoRequest) {
 		log.info("[inicia] ProdutoRestController - postProduto");
-		log.info("[idPedido] {}", idPedido);
 		pedidoService.buscaPedidoPorId(idCliente, idPedido);
 		Produto produto = produtoRepository.salvaProduto(new Produto(idPedido, produtoRequest));
 		log.info("[finaliza] ProdutoRestController - postProduto");
 		return ProdutoIdResponse.builder().idProduto(produto.getIdProduto()).build();
+	}
+
+	@Override
+	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
+		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
+		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
+		return null;
 	}
 
 }
