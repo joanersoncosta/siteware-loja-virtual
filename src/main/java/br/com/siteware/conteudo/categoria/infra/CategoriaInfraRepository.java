@@ -41,4 +41,11 @@ public class CategoriaInfraRepository implements CategoriaRepository {
 		return categoria;
 	}
 
+	@Override
+	public void deletaCategoriaPorId(Categoria categoria) {
+		log.info("[inicia] CategoriaInfraRepository - deletaCategoriaPorId");
+		categoriaSpringDataJPARepository.delete(categoria);
+		log.info("[finaliza] CategoriaInfraRepository - deletaCategoriaPorId");
+	}
+
 }

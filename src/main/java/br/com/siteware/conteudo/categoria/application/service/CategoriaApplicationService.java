@@ -50,8 +50,8 @@ public class CategoriaApplicationService implements CategoriaService {
 	public void deletaCategoriaPorId(UUID idCategoria) {
 		log.info("[inicia] CategoriaApplicationService - deletaCategoriaPorId");
 		Categoria categoria = categoriaRepository.buscaCategoriaPorId(idCategoria).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Categoria não encontrado!"));
+		categoriaRepository.deletaCategoriaPorId(categoria);
 		log.info("[finaliza] CategoriaApplicationService - deletaCategoriaPorId");
-		
 	}
 
 }

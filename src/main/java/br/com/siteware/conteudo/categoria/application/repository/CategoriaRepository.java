@@ -10,5 +10,6 @@ public interface CategoriaRepository {
 	Categoria salvaCategoria(Categoria categoria);
 	List<Categoria> buscaTodasCategorias();
 	Optional<Categoria> buscaCategoriaPorId(UUID idCategoria);
+	void deletaCategoriaPorId(Categoria categoria);
 
 }
