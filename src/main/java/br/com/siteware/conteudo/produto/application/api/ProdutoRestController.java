@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.siteware.conteudo.produto.application.service.ProdutoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -49,6 +50,13 @@ public class ProdutoRestController implements ProdutoAPI {
 		produtoService.deleteProdutoPorId(idCliente, idPedido, idProduto);
 		log.info("[finaliza] ProdutoRestController - deleteProdutoPorId");
 		
+	}
+
+	@Override
+	public void patchPedido(UUID idCliente, UUID idPedido, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest) {
+		log.info("[inicia] ProdutoRestController - patchPedido");
+		log.info("[idCliente] {}, [idPedido] {}, [idProduto] {}", idCliente, idPedido, idProduto);
+		log.info("[finaliza] ProdutoRestController - patchPedido");
 	}
 
 }
