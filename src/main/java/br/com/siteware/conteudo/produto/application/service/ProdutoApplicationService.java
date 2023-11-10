@@ -42,5 +42,12 @@ public class ProdutoApplicationService implements ProdutoService {
 		return new ProdutoDetalhadoResponse(produto);
 	}
 
+	@Override
+	public List<ProdutoPedidoListResponse> buscaTodosProdutos(UUID idCliente, UUID idPedido) {
+		log.info("[inicia] ProdutoRestController - buscaTodosProdutos");
+		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		log.info("[finaliza] ProdutoRestController - buscaTodosProdutos");
+		return null;
+	}
 
 }
