@@ -55,6 +55,8 @@ public class ProdutoApplicationService implements ProdutoService {
 	public void deleteProdutoPorId(UUID idCliente, UUID idPedido, UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - deleteProdutoPorId");
 		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		Produto produto = produtoRepository.buscaProdutoPorId(idProduto).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		produtoRepository.deleteProdutoPorId(produto);
 		log.info("[finaliza] ProdutoRestController - deleteProdutoPorId");
 	}
 
