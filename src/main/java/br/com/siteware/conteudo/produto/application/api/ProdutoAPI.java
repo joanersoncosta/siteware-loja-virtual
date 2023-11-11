@@ -18,26 +18,26 @@ import br.com.siteware.conteudo.pedido.application.api.PedidoAlteracaoRequest;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/v1/categoria/{idCategoria}")
+@RequestMapping("/v1/produto")
 public interface ProdutoAPI {
 	
-	@PostMapping(path = "/produto")
+	@PostMapping(path = "/categoria/{idCategoria}")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	ProdutoIdResponse postProduto(@PathVariable(value = "idCategoria") UUID idCategoria, @RequestBody @Valid ProdutoRequest produtoRequest);
 
-	@GetMapping(path = "/produto/{idProduto}")
+	@GetMapping(path = "/{idProduto}")
 	@ResponseStatus(value = HttpStatus.OK)
-	ProdutoDetalhadoResponse buscaProdutoPorId(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
+	ProdutoDetalhadoResponse buscaProdutoPorId(@PathVariable(value = "idProduto") UUID idProduto);
 
-	@GetMapping(path = "/produto")
+	@GetMapping(path = "/categoria/{idCategoria}")
 	@ResponseStatus(value = HttpStatus.OK)
 	List<ProdutoCategoriaListResponse> buscaTodosProdutos(@PathVariable(value = "idCategoria") UUID idCategoria);
 
-	@DeleteMapping(path = "/produto/{idProduto}")
+	@DeleteMapping(path = "/{idProduto}/categoria/{idCategoria}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void deleteProdutoPorId(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
 	
-	@PatchMapping(value = "/produto/{idProduto}")
+	@PatchMapping(value = "/{idProduto}/categoria/{idCategoria}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void patchPedido(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoAlteracaoRequest produtoAlteracaoRequest);
 

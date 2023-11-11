@@ -6,6 +6,8 @@ import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -22,11 +24,12 @@ import lombok.NoArgsConstructor;
 public class CarrinhoProduto {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idCarrinhoProduto", updatable = false, unique = true, nullable = false)
 	private UUID idCarrinhoProduto;
-	@NotNull
-	@Column(columnDefinition = "uuid", name = "idCategoria", nullable = false)
-	private UUID idCategoria;
+	@Column(columnDefinition = "uuid", name = "idProduto", updatable = false, unique = true)
+	private UUID idProduto;
+
 	@NotNull
 	@Column(unique = true)
 	private String nome;
@@ -37,10 +40,9 @@ public class CarrinhoProduto {
 	private Integer quantidade;
 	private Double subTotal;
 	
-	public CarrinhoProduto(UUID idProduto, UUID idCategoria, ProdutoDetalhadoResponse produtoDetalhadoResponse,
+	public CarrinhoProduto(UUID idProduto, ProdutoDetalhadoResponse produtoDetalhadoResponse,
 			ProdutoCarrinhoRequest produtoRequest) {
-		this.idCarrinhoProduto = idProduto;
-		this.idCategoria = idCategoria;
+		this.idProduto = idProduto;
 		this.nome = produtoDetalhadoResponse.getNome();
 		this.descricao = produtoDetalhadoResponse.getDescricao();
 		this.preco = produtoDetalhadoResponse.getPreco();

@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/cliente/{idCliente}/pedido/{idPedido}/categoria/{idCategoria}/produto/{idProduto}")
+@RequestMapping("/cliente/{idCliente}/pedido/{idPedido}/produto/{idProduto}")
 public interface ProdutoCarrinhoAPI {
 
 	@PostMapping(path = "/carrinho-produto")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoCarrinhoRequest produtoRequest);
+	ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoCarrinhoRequest produtoRequest);
 
 }

@@ -23,12 +23,12 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 	private final PedidoService pedidoService;
 	
 	@Override
-	public ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idProduto, UUID idCategoria,
+	public ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idProduto,
 			ProdutoCarrinhoRequest produtoRequest) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
 		pedidoService.buscaPedidoPorId(idCliente, idPedido);
-		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idCategoria, idProduto);
-		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.adicionaProdutoCarrinho(new CarrinhoProduto(idProduto, idCategoria, produtoDetalhadoResponse, produtoRequest));
+		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idProduto);
+		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.adicionaProdutoCarrinho(new CarrinhoProduto(idProduto, produtoDetalhadoResponse, produtoRequest));
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
 		return ProdutoCarrinhoIdResponse.builder().idCarrinhoProduto(carrinhoProduto.getIdCarrinhoProduto()).build();
 	}

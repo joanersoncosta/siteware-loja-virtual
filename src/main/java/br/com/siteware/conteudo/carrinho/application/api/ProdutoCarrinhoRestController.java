@@ -15,11 +15,11 @@ public class ProdutoCarrinhoRestController implements ProdutoCarrinhoAPI {
 	private final ProdutoCarrinhoService produtoCarrinhoService;
 	
 	@Override
-	public ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idCategoria, UUID idProduto,
+	public ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idProduto,
 			ProdutoCarrinhoRequest produtoRequest) {
 		log.info("[inicia] ProdutoCarrinhoRestController - adicionaProdutoCarrinho");
-		log.info("[idPedido] {}, [idPedido] {}, [idCategoria] {}, [idProduto] {}", idCliente, idPedido, idCategoria, idProduto);
-		ProdutoCarrinhoIdResponse ProdutoCarrinhoIdResponse = produtoCarrinhoService.adicionaProdutoCarrinho(idCliente, idPedido, idCategoria, idProduto, produtoRequest);
+		log.info("[idPedido] {}, [idPedido] {}, [idProduto] {}", idCliente, idPedido, idProduto);
+		ProdutoCarrinhoIdResponse ProdutoCarrinhoIdResponse = produtoCarrinhoService.adicionaProdutoCarrinho(idCliente, idPedido, idProduto, produtoRequest);
 		log.info("[finaliza] ProdutoCarrinhoRestController - adicionaProdutoCarrinho");
 		return ProdutoCarrinhoIdResponse;
 	}
