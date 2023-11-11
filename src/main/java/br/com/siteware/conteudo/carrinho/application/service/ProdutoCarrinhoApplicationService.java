@@ -1,10 +1,12 @@
 package br.com.siteware.conteudo.carrinho.application.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoIdResponse;
+import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoListResponse;
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
 import br.com.siteware.conteudo.carrinho.application.repository.ProdutoCarrinhoRepository;
 import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
@@ -31,6 +33,15 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.adicionaProdutoCarrinho(new CarrinhoProduto(idProduto, produtoDetalhadoResponse, produtoRequest));
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
 		return ProdutoCarrinhoIdResponse.builder().idCarrinhoProduto(carrinhoProduto.getIdCarrinhoProduto()).build();
+	}
+
+	@Override
+	public List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(UUID idCliente, UUID idPedido, UUID idProduto) {
+		log.info("[inicia] ProdutoCarrinhoApplicationService - buscaTodosProdutosCarrinho");
+		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		produtoService.buscaProdutoPorId(idProduto);
+		log.info("[finaliza] ProdutoCarrinhoApplicationService - buscaTodosProdutosCarrinho");
+		return null;
 	}
 
 }
