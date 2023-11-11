@@ -27,10 +27,10 @@ public class ProdutoCarrinhoRestController implements ProdutoCarrinhoAPI {
 	}
 
 	@Override
-	public List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(UUID idCliente, UUID idPedido, UUID idProduto) {
+	public List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] ProdutoCarrinhoRestController - buscaTodosProdutosCarrinho");
-		log.info("[idPedido] {}, [idPedido] {}, [idProduto] {}", idCliente, idPedido, idProduto);
-		List<ProdutoCarrinhoListResponse> produtoCarrinhoListResponse = produtoCarrinhoService.buscaTodosProdutosCarrinho(idCliente, idPedido, idProduto);
+		log.info("[idPedido] {}, [idPedido] {}", idCliente, idPedido);
+		List<ProdutoCarrinhoListResponse> produtoCarrinhoListResponse = produtoCarrinhoService.buscaTodosProdutosCarrinho(idCliente, idPedido);
 		log.info("[finaliza] ProdutoCarrinhoRestController - buscaTodosProdutosCarrinho");
 		return produtoCarrinhoListResponse;
 	}

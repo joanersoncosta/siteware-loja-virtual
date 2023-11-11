@@ -10,6 +10,6 @@ import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
 public interface ProdutoCarrinhoService {
 	ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idProduto,
 			ProdutoCarrinhoRequest produtoRequest);
-	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(UUID idCliente, UUID idPedido, UUID idProduto);
+	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(UUID idCliente, UUID idPedido);
 
 }

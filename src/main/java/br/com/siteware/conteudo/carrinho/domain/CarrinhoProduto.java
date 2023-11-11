@@ -1,5 +1,6 @@
 package br.com.siteware.conteudo.carrinho.domain;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
@@ -10,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -38,7 +40,6 @@ public class CarrinhoProduto {
 	private String descricao;
 	private Double preco;
 	private Integer quantidade;
-	private Double subTotal;
 	
 	public CarrinhoProduto(UUID idProduto, ProdutoDetalhadoResponse produtoDetalhadoResponse,
 			ProdutoCarrinhoRequest produtoRequest) {
@@ -47,6 +48,9 @@ public class CarrinhoProduto {
 		this.descricao = produtoDetalhadoResponse.getDescricao();
 		this.preco = produtoDetalhadoResponse.getPreco();
 		this.quantidade = produtoRequest.getQuantidade();
-		this.subTotal = 0.0;
+	}
+	
+	public Double subTotal() {
+		return preco * quantidade;
 	}
 }

@@ -1,5 +1,7 @@
 package br.com.siteware.conteudo.carrinho.infra;
 
+import java.util.List;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
@@ -26,6 +28,14 @@ public class ProdutoCarrinhoInfraRepository implements ProdutoCarrinhoRepository
 		}
 		log.info("[finaliza] ProdutoCarrinhoInfraRepository - adicionaProdutoCarrinho");
 		return carrinhoProduto;
+	}
+
+	@Override
+	public List<CarrinhoProduto> buscaTodosProdutosCarrinho() {
+		log.info("[inicia] ProdutoCarrinhoInfraRepository - buscaTodosProdutosCarrinho");
+		List<CarrinhoProduto> produtosCarrinho = produtoCarrinhoSpringDataJPARepository.findAll();
+		log.info("[finaliza] ProdutoCarrinhoInfraRepository - buscaTodosProdutosCarrinho");
+		return produtosCarrinho;
 	}
 
 }

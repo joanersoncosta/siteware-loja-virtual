@@ -36,12 +36,12 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 	}
 
 	@Override
-	public List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(UUID idCliente, UUID idPedido, UUID idProduto) {
+	public List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - buscaTodosProdutosCarrinho");
 		pedidoService.buscaPedidoPorId(idCliente, idPedido);
-		produtoService.buscaProdutoPorId(idProduto);
+		List<CarrinhoProduto> produtosCarrinho = produtoCarrinhoRepository.buscaTodosProdutosCarrinho();
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - buscaTodosProdutosCarrinho");
-		return null;
+		return ProdutoCarrinhoListResponse.converte(produtosCarrinho);
 	}
 
 }

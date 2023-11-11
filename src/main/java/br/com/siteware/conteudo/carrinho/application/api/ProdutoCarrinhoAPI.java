@@ -16,15 +16,15 @@ import br.com.siteware.conteudo.produto.application.api.ProdutoCategoriaListResp
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/cliente/{idCliente}/pedido/{idPedido}/produto/{idProduto}")
+@RequestMapping("/carrinho-produto")
 public interface ProdutoCarrinhoAPI {
 
-	@PostMapping(path = "/carrinho-produto")
+	@PostMapping(path = "/cliente/{idCliente}/pedido/{idPedido}/produto/{idProduto}")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoCarrinhoRequest produtoRequest);
 
-	@GetMapping(path = "/carrinho-produto")
+	@GetMapping(path = "/cliente/{idCliente}/pedido/{idPedido}")
 	@ResponseStatus(value = HttpStatus.OK)
-	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idProduto") UUID idProduto);
+	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
 
 }
