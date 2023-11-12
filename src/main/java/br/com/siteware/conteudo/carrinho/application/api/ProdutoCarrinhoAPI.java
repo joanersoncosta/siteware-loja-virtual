@@ -29,6 +29,4 @@ public interface ProdutoCarrinhoAPI {
 	@PostMapping(path = "/cliente/{idCliente}/pedido/{idPedido}/produto/{idPedidoCarrinho}/incrementaQuantidadeProdutoCarrinho")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void incrementaQuantidadeProdutoCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinho);
-
-	
 }

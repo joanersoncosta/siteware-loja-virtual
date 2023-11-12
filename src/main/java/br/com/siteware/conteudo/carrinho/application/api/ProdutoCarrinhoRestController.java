@@ -39,6 +39,7 @@ public class ProdutoCarrinhoRestController implements ProdutoCarrinhoAPI {
 	public void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho) {
 		log.info("[inicia] ProdutoCarrinhoRestController - incrementaQuantidadeProdutoCarrinho");
 		log.info("[idPedido] {}, [idPedido] {}, [idPedidoCarrinho] {}", idCliente, idPedido, idPedidoCarrinho);
+		produtoCarrinhoService.incrementaQuantidadeProdutoCarrinho(idCliente, idPedido, idPedidoCarrinho);
 		log.info("[finaliza] ProdutoCarrinhoRestController - incrementaQuantidadeProdutoCarrinho");
 	}
 

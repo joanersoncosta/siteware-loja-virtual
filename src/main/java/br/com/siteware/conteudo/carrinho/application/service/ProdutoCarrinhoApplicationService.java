@@ -3,16 +3,20 @@ package br.com.siteware.conteudo.carrinho.application.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoDetalhadoResponse;
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoIdResponse;
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoListResponse;
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
 import br.com.siteware.conteudo.carrinho.application.repository.ProdutoCarrinhoRepository;
 import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
+import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.service.ProdutoService;
+import br.com.siteware.conteudo.produto.domain.Produto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -42,6 +46,13 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		List<CarrinhoProduto> produtosCarrinho = produtoCarrinhoRepository.buscaTodosProdutosCarrinho();
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - buscaTodosProdutosCarrinho");
 		return ProdutoCarrinhoListResponse.converte(produtosCarrinho);
+	}
+	
+	@Override
+	public void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho) {
+		log.info("[inicia] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
+//		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		log.info("[finaliza] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
 	}
 
 }

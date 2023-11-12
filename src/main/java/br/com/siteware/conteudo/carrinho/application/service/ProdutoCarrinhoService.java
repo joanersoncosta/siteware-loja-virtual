@@ -11,5 +11,6 @@ public interface ProdutoCarrinhoService {
 	ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idProduto,
 			ProdutoCarrinhoRequest produtoRequest);
 	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(UUID idCliente, UUID idPedido);
+	void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho);
 
 }
