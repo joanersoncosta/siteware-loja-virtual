@@ -26,5 +26,9 @@ public interface ProdutoCarrinhoAPI {
 	@GetMapping(path = "/cliente/{idCliente}/pedido/{idPedido}")
 	@ResponseStatus(value = HttpStatus.OK)
 	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
-
+	
+	@GetMapping(path = "/cliente/{idCliente}/pedido/{idPedido}")
+	@ResponseStatus(value = HttpStatus.OK)
+	void incrementaQuantidadeProdutoCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
+	
 }
