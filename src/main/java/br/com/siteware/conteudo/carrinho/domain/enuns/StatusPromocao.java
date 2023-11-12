@@ -24,6 +24,6 @@ public enum StatusPromocao {
 				return valorCorrespondente;
 			}
 		}
-		return NENHUM;
+		return StatusPromocao.NENHUM;
 	}
 }

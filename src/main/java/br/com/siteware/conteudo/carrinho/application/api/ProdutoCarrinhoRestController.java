@@ -35,10 +35,4 @@ public class ProdutoCarrinhoRestController implements ProdutoCarrinhoAPI {
 		return produtoCarrinhoListResponse;
 	}
 
-	@Override
-	public void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

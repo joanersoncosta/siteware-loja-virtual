@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @Getter
 public class ProdutoCarrinhoRequest {
 	@NotNull
-	private Integer quantidade;
+	private int quantidade;
 }

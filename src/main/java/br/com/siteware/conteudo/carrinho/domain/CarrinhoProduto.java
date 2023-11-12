@@ -1,17 +1,18 @@
 package br.com.siteware.conteudo.carrinho.domain;
 
-import java.math.BigDecimal;
 import java.util.UUID;
 
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
+import br.com.siteware.conteudo.carrinho.domain.enuns.StatusPromocao;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "carrinho_produto")
 public class CarrinhoProduto {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idCarrinhoProduto", updatable = false, unique = true, nullable = false)
@@ -38,19 +39,31 @@ public class CarrinhoProduto {
 	@NotBlank
 	@Size(message = "Campo descrição produto não pode estar vazio", max = 255, min = 3)
 	private String descricao;
+	@Enumerated(EnumType.STRING)
+	private StatusPromocao statusPromocao;
 	private Double preco;
-	private Integer quantidade;
-	
+	private int quantidade;
+
 	public CarrinhoProduto(UUID idProduto, ProdutoDetalhadoResponse produtoDetalhadoResponse,
 			ProdutoCarrinhoRequest produtoRequest) {
 		this.idProduto = idProduto;
 		this.nome = produtoDetalhadoResponse.getNome();
 		this.descricao = produtoDetalhadoResponse.getDescricao();
+		this.statusPromocao = setStatusPromocao(produtoRequest.getQuantidade());
 		this.preco = produtoDetalhadoResponse.getPreco();
 		this.quantidade = produtoRequest.getQuantidade();
 	}
-	
+
 	public Double subTotal() {
+		for (StatusPromocao valorCorrespondente : StatusPromocao.values()) {
+			if (valorCorrespondente.getQuantidade() == quantidade) {
+				quantidade -= 1;
+			}
+		}
 		return preco * quantidade;
+	}
+
+	public StatusPromocao setStatusPromocao(int quantidade) {
+		return StatusPromocao.valueOf(quantidade);
 	}
 }
