@@ -48,10 +48,16 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		return ProdutoCarrinhoListResponse.converte(produtosCarrinho);
 	}
 	
+	public ProdutoCarrinhoDetalhadoResponse buscaProdutoPorId(UUID idPedidoCarrinho) {
+		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
+		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
+		return new ProdutoCarrinhoDetalhadoResponse(produto);
+	}
+
 	@Override
 	public void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
-//		pedidoService.buscaPedidoPorId(idCliente, idPedido);
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
 	}
 

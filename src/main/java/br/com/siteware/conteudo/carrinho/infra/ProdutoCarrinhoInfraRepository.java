@@ -40,4 +40,12 @@ public class ProdutoCarrinhoInfraRepository implements ProdutoCarrinhoRepository
 		return produtosCarrinho;
 	}
 
+	@Override
+	public Optional<CarrinhoProduto> buscaProdutoPorId(UUID idPedidoCarrinho) {
+		log.info("[inicia] ProdutoCarrinhoInfraRepository - buscaProdutoPorId");
+		Optional<CarrinhoProduto> produto = produtoCarrinhoSpringDataJPARepository.findById(idPedidoCarrinho);
+		log.info("[finaliza] ProdutoCarrinhoInfraRepository - buscaProdutoPorId");
+		return produto;
+	}
+
 }
