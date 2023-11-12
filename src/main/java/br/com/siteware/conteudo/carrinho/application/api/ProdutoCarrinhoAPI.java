@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.siteware.conteudo.produto.application.api.ProdutoCategoriaListResponse;
 import jakarta.validation.Valid;
 
 @RestController
@@ -26,5 +25,10 @@ public interface ProdutoCarrinhoAPI {
 	@GetMapping(path = "/cliente/{idCliente}/pedido/{idPedido}")
 	@ResponseStatus(value = HttpStatus.OK)
 	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
+	
+	@PostMapping(path = "/cliente/{idCliente}/pedido/{idPedido}/produto/{idPedidoCarrinho}/incrementaQuantidadeProdutoCarrinho")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	void incrementaQuantidadeProdutoCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinho);
+
 	
 }
