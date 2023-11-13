@@ -13,6 +13,7 @@ import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
 import br.com.siteware.conteudo.carrinho.application.repository.ProdutoCarrinhoRepository;
 import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
 import br.com.siteware.conteudo.handler.APIException;
+import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.service.ProdutoService;
@@ -31,9 +32,13 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 	public ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idProduto,
 			ProdutoCarrinhoRequest produtoRequest) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
-		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		PedidoDetalhadoResponse pedido = pedidoService.buscaPedidoPorId(idCliente, idPedido);
 		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idProduto);
 		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.salvaProdutoCarrinho(new CarrinhoProduto(idProduto, produtoDetalhadoResponse, produtoRequest));
+		
+		List<CarrinhoProduto> carrinhoProdutos = produtoCarrinhoRepository.buscaTodosProdutosCarrinho();
+		pedidoService.alteraPedido(idCliente, idPedido, carrinhoProdutos);
+		
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
 		return ProdutoCarrinhoIdResponse.builder().idCarrinhoProduto(carrinhoProduto.getIdCarrinhoProduto()).build();
 	}
@@ -47,6 +52,7 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		return ProdutoCarrinhoListResponse.converte(produtosCarrinho);
 	}
 	
+	@Override
 	public ProdutoCarrinhoDetalhadoResponse buscaProdutoPorId(UUID idPedidoCarrinho) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
 		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
@@ -61,6 +67,10 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		produto.alteraQuantidade(produto, produtoCarrinhoRequest);
 		produtoCarrinhoRepository.salvaProdutoCarrinho(produto);
+		
+		List<CarrinhoProduto> carrinhoProdutos = produtoCarrinhoRepository.buscaTodosProdutosCarrinho();
+		pedidoService.alteraPedido(idCliente, idPedido, carrinhoProdutos);
+
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
 	}
 

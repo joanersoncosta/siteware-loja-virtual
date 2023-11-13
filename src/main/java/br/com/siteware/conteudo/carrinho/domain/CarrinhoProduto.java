@@ -56,19 +56,6 @@ public class CarrinhoProduto {
 		this.quantidade = produtoRequest.getQuantidade();
 	}
 
-	public Double getSubTotal() {
-		for (StatusPromocao valorCorrespondente : StatusPromocao.values()) {
-			if (valorCorrespondente.getQuantidade() == quantidade) {
-				quantidade -= 1;
-			}
-		}
-		return preco * quantidade;
-	}
-	
-	private StatusPromocao setStatusPromocao(int quantidade) {
-		return StatusPromocao.valueOf(quantidade);
-	}
-
 	public void alteraQuantidade(CarrinhoProduto produto, ProdutoCarrinhoRequest produtoCarrinhoRequest) {
 		this.quantidade = produtoCarrinhoRequest.getQuantidade();
 		this.nome = produto.getNome();
@@ -76,5 +63,19 @@ public class CarrinhoProduto {
 		this.statusPromocao = setStatusPromocao(produtoCarrinhoRequest.getQuantidade());
 		this.preco = produto.getPreco();
 		this.quantidade = produtoCarrinhoRequest.getQuantidade();
+	}
+	
+	public Double getSubTotal() {
+		int diminuiQuantidade = quantidade;
+		for (StatusPromocao valorCorrespondente : StatusPromocao.values()) {
+			if (valorCorrespondente.getQuantidade() == quantidade) {
+				diminuiQuantidade -= 1;
+			}
+		}
+		return preco * diminuiQuantidade;
+	}
+	
+	private StatusPromocao setStatusPromocao(int quantidade) {
+		return StatusPromocao.valueOf(quantidade);
 	}
 }
