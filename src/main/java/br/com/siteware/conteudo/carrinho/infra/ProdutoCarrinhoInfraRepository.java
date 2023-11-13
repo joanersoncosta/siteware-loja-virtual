@@ -21,14 +21,14 @@ public class ProdutoCarrinhoInfraRepository implements ProdutoCarrinhoRepository
 	private final ProdutoCarrinhoSpringDataJPARepository produtoCarrinhoSpringDataJPARepository;
 	
 	@Override
-	public CarrinhoProduto adicionaProdutoCarrinho(CarrinhoProduto carrinhoProduto) {
-		log.info("[inicia] ProdutoCarrinhoInfraRepository - adicionaProdutoCarrinho");
+	public CarrinhoProduto salvaProdutoCarrinho(CarrinhoProduto carrinhoProduto) {
+		log.info("[inicia] ProdutoCarrinhoInfraRepository - salvaProdutoCarrinho");
 		try {
 			produtoCarrinhoSpringDataJPARepository.save(carrinhoProduto);
 		}catch (DataIntegrityViolationException ex) {
 			throw APIException.build(HttpStatus.BAD_REQUEST, "Produto já adicionado ao carrinho!");
 		}
-		log.info("[finaliza] ProdutoCarrinhoInfraRepository - adicionaProdutoCarrinho");
+		log.info("[finaliza] ProdutoCarrinhoInfraRepository - salvaProdutoCarrinho");
 		return carrinhoProduto;
 	}
 

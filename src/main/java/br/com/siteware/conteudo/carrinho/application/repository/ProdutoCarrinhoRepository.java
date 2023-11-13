@@ -7,7 +7,7 @@ import java.util.UUID;
 import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
 
 public interface ProdutoCarrinhoRepository {
-	CarrinhoProduto adicionaProdutoCarrinho(CarrinhoProduto carrinhoProduto);
+	CarrinhoProduto salvaProdutoCarrinho(CarrinhoProduto carrinhoProduto);
 	List<CarrinhoProduto> buscaTodosProdutosCarrinho();
 	Optional<CarrinhoProduto> buscaProdutoPorId(UUID idPedidoCarrinho);
 

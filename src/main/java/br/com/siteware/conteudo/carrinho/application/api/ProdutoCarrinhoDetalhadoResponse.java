@@ -25,6 +25,6 @@ public class ProdutoCarrinhoDetalhadoResponse {
 		this.statusPromocao = carrinhoProduto.getStatusPromocao();
 		this.preco = carrinhoProduto.getPreco();
 		this.quantidade = carrinhoProduto.getQuantidade();
-		this.subTotal = carrinhoProduto.subTotal();
+		this.subTotal = carrinhoProduto.getSubTotal();
 	}
 }

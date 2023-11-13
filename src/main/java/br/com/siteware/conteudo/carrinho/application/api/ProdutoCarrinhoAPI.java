@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,15 +19,15 @@ import jakarta.validation.Valid;
 @RequestMapping("/carrinho-produto")
 public interface ProdutoCarrinhoAPI {
 
-	@PostMapping(path = "/cliente/{idCliente}/pedido/{idPedido}/produto/{idProduto}")
+	@PostMapping(path = "/adicionaProdutoCarrinho")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoCarrinhoRequest produtoRequest);
+	ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @RequestParam(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoCarrinhoRequest produtoRequest);
 
-	@GetMapping(path = "/cliente/{idCliente}/pedido/{idPedido}")
+	@GetMapping(path = "/buscaTodosProdutosCarrinho")
 	@ResponseStatus(value = HttpStatus.OK)
-	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
+	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido);
 	
-	@PostMapping(path = "/cliente/{idCliente}/pedido/{idPedido}/produto/{idPedidoCarrinho}/incrementaQuantidadeProdutoCarrinho")
+	@PostMapping(path = "/{idPedidoCarrinho}/incrementaQuantidadeProdutoCarrinho")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	void incrementaQuantidadeProdutoCarrinho(@PathVariable(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinho);
+	void incrementaQuantidadeProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinho, @RequestBody @Valid ProdutoCarrinhoRequest produtoCarrinhoRequest);
 }

@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -41,6 +42,7 @@ public class CarrinhoProduto {
 	private String descricao;
 	@Enumerated(EnumType.STRING)
 	private StatusPromocao statusPromocao;
+//	@Digits(integer=5, fraction=2)
 	private Double preco;
 	private int quantidade;
 
@@ -49,12 +51,12 @@ public class CarrinhoProduto {
 		this.idProduto = idProduto;
 		this.nome = produtoDetalhadoResponse.getNome();
 		this.descricao = produtoDetalhadoResponse.getDescricao();
-		this.statusPromocao = setStatusPromocao(produtoRequest.getQuantidade());
+		this.statusPromocao = setStatusPromocao(quantidade);
 		this.preco = produtoDetalhadoResponse.getPreco();
 		this.quantidade = produtoRequest.getQuantidade();
 	}
 
-	public Double subTotal() {
+	public Double getSubTotal() {
 		for (StatusPromocao valorCorrespondente : StatusPromocao.values()) {
 			if (valorCorrespondente.getQuantidade() == quantidade) {
 				quantidade -= 1;
@@ -62,8 +64,17 @@ public class CarrinhoProduto {
 		}
 		return preco * quantidade;
 	}
-
-	public StatusPromocao setStatusPromocao(int quantidade) {
+	
+	private StatusPromocao setStatusPromocao(int quantidade) {
 		return StatusPromocao.valueOf(quantidade);
+	}
+
+	public void alteraQuantidade(CarrinhoProduto produto, ProdutoCarrinhoRequest produtoCarrinhoRequest) {
+		this.quantidade = produtoCarrinhoRequest.getQuantidade();
+		this.nome = produto.getNome();
+		this.descricao = produto.getDescricao();
+		this.statusPromocao = setStatusPromocao(produtoCarrinhoRequest.getQuantidade());
+		this.preco = produto.getPreco();
+		this.quantidade = produtoCarrinhoRequest.getQuantidade();
 	}
 }

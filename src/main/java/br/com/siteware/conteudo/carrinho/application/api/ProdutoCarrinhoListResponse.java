@@ -17,7 +17,7 @@ public class ProdutoCarrinhoListResponse {
 	private StatusPromocao statusPromocao;
 	private Double preco;
 	private Integer quantidade;
-	@Digits(integer=5, fraction=2)
+//	@Digits(integer=5, fraction=2)
 	private Double subTotal;
 
 	public ProdutoCarrinhoListResponse(CarrinhoProduto carrinhoProduto) {
@@ -27,7 +27,7 @@ public class ProdutoCarrinhoListResponse {
 		this.statusPromocao = carrinhoProduto.getStatusPromocao();
 		this.preco = carrinhoProduto.getPreco();
 		this.quantidade = carrinhoProduto.getQuantidade();
-		this.subTotal = carrinhoProduto.subTotal();
+		this.subTotal = carrinhoProduto.getSubTotal();
 	}
 
 	public static List<ProdutoCarrinhoListResponse> converte(List<CarrinhoProduto> produtosCarrinho) {
@@ -36,5 +36,4 @@ public class ProdutoCarrinhoListResponse {
 				.map(ProdutoCarrinhoListResponse::new)
 				.collect(Collectors.toList());
 	}
-
 }

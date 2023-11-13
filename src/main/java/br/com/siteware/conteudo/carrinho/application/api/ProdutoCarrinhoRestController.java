@@ -6,7 +6,6 @@ import java.util.UUID;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.siteware.conteudo.carrinho.application.service.ProdutoCarrinhoService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -36,11 +35,12 @@ public class ProdutoCarrinhoRestController implements ProdutoCarrinhoAPI {
 	}
 
 	@Override
-	public void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho) {
+	public void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho, ProdutoCarrinhoRequest produtoCarrinhoRequest) {
 		log.info("[inicia] ProdutoCarrinhoRestController - incrementaQuantidadeProdutoCarrinho");
 		log.info("[idPedido] {}, [idPedido] {}, [idPedidoCarrinho] {}", idCliente, idPedido, idPedidoCarrinho);
-		produtoCarrinhoService.incrementaQuantidadeProdutoCarrinho(idCliente, idPedido, idPedidoCarrinho);
+		produtoCarrinhoService.incrementaQuantidadeProdutoCarrinho(idCliente, idPedido, idPedidoCarrinho, produtoCarrinhoRequest);
 		log.info("[finaliza] ProdutoCarrinhoRestController - incrementaQuantidadeProdutoCarrinho");
 	}
+
 
 }

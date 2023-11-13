@@ -16,7 +16,6 @@ import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.service.ProdutoService;
-import br.com.siteware.conteudo.produto.domain.Produto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -34,7 +33,7 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		log.info("[inicia] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
 		pedidoService.buscaPedidoPorId(idCliente, idPedido);
 		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idProduto);
-		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.adicionaProdutoCarrinho(new CarrinhoProduto(idProduto, produtoDetalhadoResponse, produtoRequest));
+		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.salvaProdutoCarrinho(new CarrinhoProduto(idProduto, produtoDetalhadoResponse, produtoRequest));
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
 		return ProdutoCarrinhoIdResponse.builder().idCarrinhoProduto(carrinhoProduto.getIdCarrinhoProduto()).build();
 	}
@@ -56,8 +55,12 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 	}
 
 	@Override
-	public void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho) {
+	public void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho, ProdutoCarrinhoRequest produtoCarrinhoRequest) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
+		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		produto.alteraQuantidade(produto, produtoCarrinhoRequest);
+		produtoCarrinhoRepository.salvaProdutoCarrinho(produto);
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
 	}
 
