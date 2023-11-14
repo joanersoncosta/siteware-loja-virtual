@@ -10,5 +10,5 @@ public interface ProdutoCarrinhoRepository {
 	CarrinhoProduto salvaProdutoCarrinho(CarrinhoProduto carrinhoProduto);
 	List<CarrinhoProduto> buscaTodosProdutosCarrinho();
 	Optional<CarrinhoProduto> buscaProdutoPorId(UUID idPedidoCarrinho);
-
+	void removeProdutoCarrinho(CarrinhoProduto produto);
 }

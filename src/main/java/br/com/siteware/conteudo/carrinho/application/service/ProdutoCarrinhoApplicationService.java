@@ -77,6 +77,10 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 	@Override
 	public void removeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - removeProdutoCarrinho");
+		pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		produtoCarrinhoRepository.removeProdutoCarrinho(produto);
+		atualizaTotalPedido(idCliente, idPedido);
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - removeProdutoCarrinho");
 	}
 }

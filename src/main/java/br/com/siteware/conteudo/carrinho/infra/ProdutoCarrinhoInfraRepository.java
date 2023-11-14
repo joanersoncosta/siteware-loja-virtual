@@ -48,4 +48,11 @@ public class ProdutoCarrinhoInfraRepository implements ProdutoCarrinhoRepository
 		return produto;
 	}
 
+	@Override
+	public void removeProdutoCarrinho(CarrinhoProduto produto) {
+		log.info("[inicia] ProdutoCarrinhoInfraRepository - removeProdutoCarrinho");
+		produtoCarrinhoSpringDataJPARepository.delete(produto);
+		log.info("[finaliza] ProdutoCarrinhoInfraRepository - removeProdutoCarrinho");
+	}
+
 }
