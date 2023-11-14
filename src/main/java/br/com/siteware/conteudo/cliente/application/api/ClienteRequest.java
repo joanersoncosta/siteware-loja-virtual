@@ -7,9 +7,12 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Value
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class ClienteRequest {
 	@NotBlank
 	private String nome;
