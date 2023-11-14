@@ -35,10 +35,6 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idProduto);
 		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.salvaProdutoCarrinho(new CarrinhoProduto(idProduto, produtoDetalhadoResponse, produtoRequest));
 		atualizaTotalPedido(idCliente, idPedido);
-
-//		List<CarrinhoProduto> carrinhoProdutos = produtoCarrinhoRepository.buscaTodosProdutosCarrinho();
-//		pedidoService.alteraPedido(idCliente, idPedido, carrinhoProdutos);
-		
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
 		return ProdutoCarrinhoIdResponse.builder().idCarrinhoProduto(carrinhoProduto.getIdCarrinhoProduto()).build();
 	}
@@ -68,23 +64,8 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		produto.alteraQuantidade(produto, produtoCarrinhoRequest);
 		produtoCarrinhoRepository.salvaProdutoCarrinho(produto);
 		atualizaTotalPedido(idCliente, idPedido);
-//		List<CarrinhoProduto> carrinhoProdutos = produtoCarrinhoRepository.buscaTodosProdutosCarrinho();
-//		pedidoService.alteraPedido(idCliente, idPedido, carrinhoProdutos);
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
 	}
-	
-//	@Override
-//	public void atualizaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho, ProdutoCarrinhoRequest produtoCarrinhoRequest) {
-//		log.info("[inicia] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
-//		pedidoService.buscaPedidoPorId(idCliente, idPedido);
-//		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
-//		produto.alteraQuantidade(produto, produtoCarrinhoRequest);
-//		produtoCarrinhoRepository.salvaProdutoCarrinho(produto);
-//		atualizaPedido(idCliente, idPedido);
-////		List<CarrinhoProduto> carrinhoProdutos = produtoCarrinhoRepository.buscaTodosProdutosCarrinho();
-////		pedidoService.alteraPedido(idCliente, idPedido, carrinhoProdutos);
-//		log.info("[finaliza] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
-//	}
 	
 	private void atualizaTotalPedido(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - atualizaPedido");
@@ -92,6 +73,4 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		pedidoService.alteraPedido(idCliente, idPedido, produtosCarrinho);
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - atualizaPedido");
 	}
-	
-	
 }

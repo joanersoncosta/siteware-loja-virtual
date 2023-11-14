@@ -8,6 +8,7 @@ import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse
 import br.com.siteware.conteudo.produto.application.api.ProdutoIdResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoCategoriaListResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoRequest;
+import br.com.siteware.conteudo.produto.domain.Produto;
 
 public interface ProdutoService {
 	ProdutoIdResponse salvaProduto(UUID idCategoria, ProdutoRequest produtoRequest);
@@ -15,5 +16,4 @@ public interface ProdutoService {
 	List<ProdutoCategoriaListResponse> buscaTodosProdutos(UUID idCategoria);
 	void deleteProdutoPorId(UUID idCategoria, UUID idProduto);
 	void alteraProduto(UUID idCategoria, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest);
-
 }

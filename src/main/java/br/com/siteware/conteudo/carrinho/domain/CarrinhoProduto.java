@@ -13,7 +13,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -64,7 +63,7 @@ public class CarrinhoProduto {
 		this.preco = produto.getPreco();
 		this.quantidade = produtoCarrinhoRequest.getQuantidade();
 	}
-	
+
 	public Double getSubTotal() {
 		int diminuiQuantidade = quantidade;
 		for (StatusPromocao valorCorrespondente : StatusPromocao.values()) {
@@ -74,8 +73,15 @@ public class CarrinhoProduto {
 		}
 		return preco * diminuiQuantidade;
 	}
-	
+
 	private StatusPromocao setStatusPromocao(int quantidade) {
 		return StatusPromocao.valueOf(quantidade);
+	}
+
+	public void atualizaProdutoRequest(ProdutoDetalhadoResponse produtoAtualizado) {
+		this.nome = produtoAtualizado.getNome();
+		this.descricao = produtoAtualizado.getDescricao();
+		this.statusPromocao = setStatusPromocao(quantidade);
+		this.preco = produtoAtualizado.getPreco();
 	}
 }

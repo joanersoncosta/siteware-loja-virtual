@@ -42,5 +42,10 @@ public class ProdutoCarrinhoRestController implements ProdutoCarrinhoAPI {
 		log.info("[finaliza] ProdutoCarrinhoRestController - incrementaQuantidadeProdutoCarrinho");
 	}
 
-
+	@Override
+	public void removeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho) {
+		log.info("[inicia] ProdutoCarrinhoRestController - incrementaQuantidadeProdutoCarrinho");
+		log.info("[idPedido] {}, [idPedido] {}, [idPedidoCarrinho] {}", idCliente, idPedido, idPedidoCarrinho);
+		log.info("[finaliza] ProdutoCarrinhoRestController - incrementaQuantidadeProdutoCarrinho");
+	}
 }

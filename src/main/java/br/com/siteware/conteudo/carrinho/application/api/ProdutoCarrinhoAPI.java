@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,4 +31,9 @@ public interface ProdutoCarrinhoAPI {
 	@PostMapping(path = "/{idPedidoCarrinho}/incrementaQuantidadeProdutoCarrinho")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void incrementaQuantidadeProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinho, @RequestBody @Valid ProdutoCarrinhoRequest produtoCarrinhoRequest);
+
+	@DeleteMapping(path = "/{idPedidoCarrinho}/incrementaQuantidadeProdutoCarrinho")
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	void removeProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinhoprodutoCarrinhoRequest);
+
 }
