@@ -15,5 +15,4 @@ public interface PedidoService {
 	List<PedidoClienteListResponse> buscaTodosPedidosPorId(UUID idCliente);
 	void deletePedidoPorId(UUID idCliente, UUID idPedido);
 	void alteraPedido(UUID idCliente, UUID idPedido, PedidoAlteracaoRequest pedidoAlteracaoRequest);
-
 }

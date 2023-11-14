@@ -23,14 +23,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Entity
-public class Pedido{
+public class Pedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idPedido", updatable = false, unique = true, nullable = false)
 	private UUID idPedido;
 	@NotNull
-	@Column(columnDefinition = "uuid", name = "idCliente", nullable = false)
+	@Column(columnDefinition = "uuid", name = "idCliente", nullable = false, unique = true)
 	private UUID idCliente;
 	@NotNull
 	@Enumerated(value = EnumType.STRING)
@@ -39,18 +39,17 @@ public class Pedido{
 	@Size(message = "Campo descrição pedido não pode estar vazio", max = 255, min = 3)
 	private String descricao;
 	private LocalDateTime momentoDoPedido;
+	private Double total = 0.0;
 
 	public Pedido(UUID idCliente, PedidoRequest pedidoRequest) {
 		this.idCliente = idCliente;
 		this.pedidoStatus = PedidoStatus.PENDENTE;
 		this.descricao = pedidoRequest.getDescricao();
+		this.total = 0.0;
 		this.momentoDoPedido = LocalDateTime.now();
 	}
 
 	public void altera(PedidoAlteracaoRequest pedidoAlteracaoRequest) {
-		this.pedidoStatus = PedidoStatus.PENDENTE;
 		this.descricao = pedidoAlteracaoRequest.getDescricao();
-		this.momentoDoPedido = LocalDateTime.now();
 	}
-
 }

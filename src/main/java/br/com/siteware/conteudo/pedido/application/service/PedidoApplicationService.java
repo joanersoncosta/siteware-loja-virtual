@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.siteware.conteudo.cliente.application.service.ClienteService;
 import br.com.siteware.conteudo.handler.APIException;
-import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
-import br.com.siteware.conteudo.pedido.application.api.PedidoIdResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoAlteracaoRequest;
 import br.com.siteware.conteudo.pedido.application.api.PedidoClienteListResponse;
+import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
+import br.com.siteware.conteudo.pedido.application.api.PedidoIdResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.application.repository.PedidoRepository;
 import br.com.siteware.conteudo.pedido.domain.Pedido;
@@ -38,9 +38,11 @@ public class PedidoApplicationService implements PedidoService {
 	public PedidoDetalhadoResponse buscaPedidoPorId(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] PedidoApplicationService - buscaPedidoPorId");
 		clienteServicce.buscaClientePorId(idCliente);	
-		Pedido pedido = pedidoRepository.buscaPedidoPorId(idPedido).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
+		var pedidoResponse = pedidoRepository.buscaPedidoPorId(idPedido)
+				.map(PedidoDetalhadoResponse::convertePedidoParaResponse)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
 		log.info("[finaliza] PedidoApplicationService - buscaPedidoPorId");
-		return new PedidoDetalhadoResponse(pedido);
+		return pedidoResponse;
 	}
 
 	@Override
@@ -49,7 +51,7 @@ public class PedidoApplicationService implements PedidoService {
 		clienteServicce.buscaClientePorId(idCliente);	
 		List<Pedido> pedidos = pedidoRepository.buscaTodosPedidosPorId();
 		log.info("[finaliza] PedidoApplicationService - buscaTodosPedidosPorId");
-			return PedidoClienteListResponse.converte(pedidos);
+		return PedidoClienteListResponse.converte(pedidos);
 	}
 
 	@Override
@@ -71,5 +73,6 @@ public class PedidoApplicationService implements PedidoService {
 		log.info("[finaliza] PedidoApplicationService - alteraPedido");
 		
 	}
+	
 
 }
