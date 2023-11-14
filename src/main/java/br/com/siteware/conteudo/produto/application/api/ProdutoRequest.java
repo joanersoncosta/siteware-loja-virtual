@@ -18,4 +18,6 @@ public class ProdutoRequest {
 	@NotBlank
 	@Size(message = "Campo descrição produto não pode estar vazio", max = 255, min = 3)
 	private String descricao;
+	@NotNull
+	private Double preco;
 }

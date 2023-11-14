@@ -11,34 +11,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.siteware.conteudo.pedido.application.api.PedidoAlteracaoRequest;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/v1/categoria/{idCategoria}")
+@RequestMapping("/v1/produto")
 public interface ProdutoAPI {
 	
-	@PostMapping(path = "/produto")
+	@PostMapping(path = "/cadastra-produto")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	ProdutoIdResponse postProduto(@PathVariable(value = "idCategoria") UUID idCategoria, @RequestBody @Valid ProdutoRequest produtoRequest);
+	ProdutoIdResponse postProduto(@RequestParam(value = "idCategoria") UUID idCategoria, @RequestBody @Valid ProdutoRequest produtoRequest);
 
-	@GetMapping(path = "/produto/{idProduto}")
+	@GetMapping(path = "/{idProduto}/busca-produto")
 	@ResponseStatus(value = HttpStatus.OK)
-	ProdutoDetalhadoResponse buscaProdutoPorId(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
+	ProdutoDetalhadoResponse buscaProdutoPorId(@PathVariable(value = "idProduto") UUID idProduto);
 
-	@GetMapping(path = "/produto")
+	@GetMapping(path = "/busca-produtos")
 	@ResponseStatus(value = HttpStatus.OK)
-	List<ProdutoCategoriaListResponse> buscaTodosProdutos(@PathVariable(value = "idCategoria") UUID idCategoria);
+	List<ProdutoCategoriaListResponse> buscaTodosProdutos(@RequestParam(value = "idCategoria") UUID idCategoria);
 
-	@DeleteMapping(path = "/produto/{idProduto}")
+	@DeleteMapping(path = "/{idProduto}/deleta-produto")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	void deleteProdutoPorId(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
+	void deleteProdutoPorId(@RequestParam(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
 	
-	@PatchMapping(value = "/produto/{idProduto}")
+	@PatchMapping(value = "/{idProduto}altera-produto")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	void patchPedido(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoAlteracaoRequest produtoAlteracaoRequest);
+	void patchPedido(@RequestParam(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoAlteracaoRequest produtoAlteracaoRequest);
 
 }

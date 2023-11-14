@@ -26,10 +26,10 @@ public class ProdutoRestController implements ProdutoAPI {
 	}
 
 	@Override
-	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCategoria, UUID idProduto) {
+	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
-		log.info("[idCategoria] {}, [idProduto] {}", idCategoria, idProduto);
-		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idCategoria, idProduto);
+		log.info("[idProduto] {}", idProduto);
+		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idProduto);
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
 		return produtoDetalhadoResponse;
 	}

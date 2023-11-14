@@ -6,14 +6,13 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.com.siteware.conteudo.categoria.application.api.CategoriaDetalhadoResponse;
 import br.com.siteware.conteudo.categoria.application.service.CategoriaService;
 import br.com.siteware.conteudo.handler.APIException;
-import br.com.siteware.conteudo.pedido.application.service.PedidoService;
+import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoAlteracaoRequest;
+import br.com.siteware.conteudo.produto.application.api.ProdutoCategoriaListResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoIdResponse;
-import br.com.siteware.conteudo.produto.application.api.ProdutoCategoriaListResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoRequest;
 import br.com.siteware.conteudo.produto.application.repository.ProdutoRepository;
 import br.com.siteware.conteudo.produto.domain.Produto;
@@ -24,8 +23,7 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @Log4j2
 public class ProdutoApplicationService implements ProdutoService {
-	private final ProdutoRepository produtoRepository; 
-	private final PedidoService pedidoService; 
+	private final ProdutoRepository produtoRepository;
 	private final CategoriaService categoriaService;
 
 	@Override
@@ -38,19 +36,20 @@ public class ProdutoApplicationService implements ProdutoService {
 	}
 
 	@Override
-	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idCategoria, UUID idProduto) {
+	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
-		categoriaService.buscaCategoriaPorId(idCategoria);
-		Produto produto = produtoRepository.buscaProdutoPorId(idProduto).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		var produtoResponse = produtoRepository.buscaProdutoPorId(idProduto)
+				.map(ProdutoDetalhadoResponse::converteProdutoParaResponse)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
-		return new ProdutoDetalhadoResponse(produto);
+		return produtoResponse;
 	}
 
 	@Override
 	public List<ProdutoCategoriaListResponse> buscaTodosProdutos(UUID idCategoria) {
 		log.info("[inicia] ProdutoRestController - buscaTodosProdutos");
 		categoriaService.buscaCategoriaPorId(idCategoria);
-		List<Produto>  produtos = produtoRepository.buscaTodosProdutos();
+		List<Produto> produtos = produtoRepository.buscaTodosProdutos();
 		log.info("[finaliza] ProdutoRestController - buscaTodosProdutos");
 		return ProdutoCategoriaListResponse.converte(produtos);
 	}
@@ -59,7 +58,8 @@ public class ProdutoApplicationService implements ProdutoService {
 	public void deleteProdutoPorId(UUID idCategoria, UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - deleteProdutoPorId");
 		categoriaService.buscaCategoriaPorId(idCategoria);
-		Produto produto = produtoRepository.buscaProdutoPorId(idProduto).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		Produto produto = produtoRepository.buscaProdutoPorId(idProduto)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		produtoRepository.deleteProdutoPorId(produto);
 		log.info("[finaliza] ProdutoRestController - deleteProdutoPorId");
 	}
@@ -68,10 +68,10 @@ public class ProdutoApplicationService implements ProdutoService {
 	public void alteraProduto(UUID idCategoria, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest) {
 		log.info("[inicia] ProdutoRestController - alteraProduto");
 		categoriaService.buscaCategoriaPorId(idCategoria);
-		Produto produto = produtoRepository.buscaProdutoPorId(idProduto).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		Produto produto = produtoRepository.buscaProdutoPorId(idProduto)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		produto.altera(produtoAlteracaoRequest);
 		produtoRepository.salvaProduto(produto);
 		log.info("[finaliza] ProdutoRestController - alteraProduto");
 	}
-
 }
