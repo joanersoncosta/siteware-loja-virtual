@@ -19,13 +19,17 @@ public class PedidoDetalhadoResponse {
 
 	private LocalDateTime momentoDoPedido;
 	
-	public PedidoDetalhadoResponse(Pedido pedido) {
+	private PedidoDetalhadoResponse(Pedido pedido) {
 		this.idPedido = pedido.getIdPedido();
 		this.idCliente = pedido.getIdCliente();
 		this.pedidoStatus = pedido.getPedidoStatus();
 		this.descricao = pedido.getDescricao();
 		this.total = pedido.getTotal();
 		this.momentoDoPedido = pedido.getMomentoDoPedido();
+	}
+	
+	public static PedidoDetalhadoResponse convertePedidoParaResponse(Pedido pedido) {
+		return new PedidoDetalhadoResponse(pedido);
 	}
 
 }

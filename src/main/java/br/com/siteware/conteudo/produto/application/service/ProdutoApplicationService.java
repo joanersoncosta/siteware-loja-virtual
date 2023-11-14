@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.siteware.conteudo.categoria.application.service.CategoriaService;
 import br.com.siteware.conteudo.handler.APIException;
+import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoAlteracaoRequest;
 import br.com.siteware.conteudo.produto.application.api.ProdutoCategoriaListResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
@@ -37,10 +38,11 @@ public class ProdutoApplicationService implements ProdutoService {
 	@Override
 	public ProdutoDetalhadoResponse buscaProdutoPorId(UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
-		Produto produto = produtoRepository.buscaProdutoPorId(idProduto)
+		var produtoResponse = produtoRepository.buscaProdutoPorId(idProduto)
+				.map(ProdutoDetalhadoResponse::converteProdutoParaResponse)
 				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
-		return new ProdutoDetalhadoResponse(produto);
+		return produtoResponse;
 	}
 
 	@Override

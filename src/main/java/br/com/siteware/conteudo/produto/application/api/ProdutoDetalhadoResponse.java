@@ -13,12 +13,16 @@ public class ProdutoDetalhadoResponse {
 	private String descricao;
 	private Double preco;
 
-	public ProdutoDetalhadoResponse(Produto produro) {
+	private ProdutoDetalhadoResponse(Produto produro) {
 		this.idProduto = produro.getIdProduto();
 		this.idCategoria = produro.getIdCategoria();
 		this.nome = produro.getNome();
 		this.descricao = produro.getDescricao();
 		this.preco = produro.getPreco();
+	}
+	
+	public static ProdutoDetalhadoResponse converteProdutoParaResponse(Produto produro) {
+		return new ProdutoDetalhadoResponse(produro);
 	}
 	
 }

@@ -6,8 +6,6 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoListResponse;
-import br.com.siteware.conteudo.carrinho.application.service.ProdutoCarrinhoService;
 import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
 import br.com.siteware.conteudo.cliente.application.service.ClienteService;
 import br.com.siteware.conteudo.handler.APIException;
@@ -41,12 +39,13 @@ public class PedidoApplicationService implements PedidoService {
 	public PedidoDetalhadoResponse buscaPedidoPorId(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] PedidoApplicationService - buscaPedidoPorId");
 		clienteServicce.buscaClientePorId(idCliente);	
-//		produtoCarrinhoService.buscaProdutoPorId(idCliente);
-		Pedido pedido = pedidoRepository.buscaPedidoPorId(idPedido).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
-		pedidoRepository.salvaPedido(pedido);
+		var pedidoResponse = pedidoRepository.buscaPedidoPorId(idPedido)
+				.map(PedidoDetalhadoResponse::convertePedidoParaResponse)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
+//		pedidoRepository.salvaPedido(pedido);
 		
 		log.info("[finaliza] PedidoApplicationService - buscaPedidoPorId");
-		return new PedidoDetalhadoResponse(pedido);
+		return pedidoResponse;
 	}
 
 	@Override

@@ -51,9 +51,11 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 	@Override
 	public ProdutoCarrinhoDetalhadoResponse buscaProdutoPorId(UUID idPedidoCarrinho) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
-		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		var produtoResponse = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho)
+				.map(ProdutoCarrinhoDetalhadoResponse::converteProdutoCarrinhoParaResponse)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
 		log.info("[finaliza] ProdutoRestController - buscaProdutoPorId");
-		return new ProdutoCarrinhoDetalhadoResponse(produto);
+		return produtoResponse;
 	}
 
 	@Override

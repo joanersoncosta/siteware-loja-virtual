@@ -18,7 +18,7 @@ public class ProdutoCarrinhoDetalhadoResponse {
 	@Digits(integer=5, fraction=2)
 	private Double subTotal;
 
-	public ProdutoCarrinhoDetalhadoResponse(CarrinhoProduto carrinhoProduto) {
+	private ProdutoCarrinhoDetalhadoResponse(CarrinhoProduto carrinhoProduto) {
 		this.idProdutoCarrinho = carrinhoProduto.getIdCarrinhoProduto();
 		this.nome = carrinhoProduto.getNome();
 		this.descricao = carrinhoProduto.getDescricao();
@@ -26,5 +26,9 @@ public class ProdutoCarrinhoDetalhadoResponse {
 		this.preco = carrinhoProduto.getPreco();
 		this.quantidade = carrinhoProduto.getQuantidade();
 		this.subTotal = carrinhoProduto.getSubTotal();
+	}
+	
+	public static ProdutoCarrinhoDetalhadoResponse converteProdutoCarrinhoParaResponse(CarrinhoProduto carrinhoProduto) {
+		return new ProdutoCarrinhoDetalhadoResponse(carrinhoProduto);
 	}
 }
