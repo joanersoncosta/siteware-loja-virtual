@@ -32,7 +32,7 @@ public interface ProdutoCarrinhoAPI {
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void incrementaQuantidadeProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinho, @RequestBody @Valid ProdutoCarrinhoRequest produtoCarrinhoRequest);
 
-	@DeleteMapping(path = "/{idPedidoCarrinho}/incrementaQuantidadeProdutoCarrinho")
+	@DeleteMapping(path = "/{idPedidoCarrinho}/removeProdutoCarrinho")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void removeProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinhoprodutoCarrinhoRequest);
 

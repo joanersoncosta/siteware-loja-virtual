@@ -73,4 +73,10 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		pedidoService.alteraPedido(idCliente, idPedido, produtosCarrinho);
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - atualizaPedido");
 	}
+
+	@Override
+	public void removeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho) {
+		log.info("[inicia] ProdutoCarrinhoApplicationService - removeProdutoCarrinho");
+		log.info("[finaliza] ProdutoCarrinhoApplicationService - removeProdutoCarrinho");
+	}
 }
