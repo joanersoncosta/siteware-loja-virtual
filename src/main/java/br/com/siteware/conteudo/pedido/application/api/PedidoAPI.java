@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/pedido")
 public interface PedidoAPI {
 	
-	@PostMapping
+	@PostMapping(path = "/cria-pedido")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	PedidoIdResponse postPedido(@RequestParam(value = "idCliente") UUID idCliente, @RequestBody @Valid PedidoRequest pedidoRequest);
 	
@@ -29,7 +29,7 @@ public interface PedidoAPI {
 	@ResponseStatus(value = HttpStatus.OK)
 	PedidoDetalhadoResponse buscaPedidoPorId(@RequestParam(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
 
-	@GetMapping
+	@GetMapping(path = "/busca-pedidos")
 	@ResponseStatus(value = HttpStatus.OK)
 	List<PedidoClienteListResponse> buscaTodosPedidosPorId(@RequestParam(value = "idCliente") UUID idCliente);
 	
@@ -37,7 +37,7 @@ public interface PedidoAPI {
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void deletePedidoPorId(@RequestParam(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
 	
-	@PatchMapping(value = "/{idPedido}")
+	@PatchMapping(value = "/{idPedido}/altera-pedido")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void patchPedido(@RequestParam(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @RequestBody @Valid PedidoAlteracaoRequest pedidoAlteracaoRequest);
 

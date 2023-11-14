@@ -41,7 +41,6 @@ public class CarrinhoProduto {
 	private String descricao;
 	@Enumerated(EnumType.STRING)
 	private StatusPromocao statusPromocao;
-//	@Digits(integer=5, fraction=2)
 	private Double preco;
 	private int quantidade;
 
@@ -50,7 +49,7 @@ public class CarrinhoProduto {
 		this.idProduto = idProduto;
 		this.nome = produtoDetalhadoResponse.getNome();
 		this.descricao = produtoDetalhadoResponse.getDescricao();
-		this.statusPromocao = setStatusPromocao(quantidade);
+		this.statusPromocao = setStatusPromocao(produtoRequest.getQuantidade());
 		this.preco = produtoDetalhadoResponse.getPreco();
 		this.quantidade = produtoRequest.getQuantidade();
 	}

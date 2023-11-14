@@ -42,7 +42,7 @@ public class Cliente {
 	@Enumerated(value = EnumType.STRING)
 	private Sexo sexo;
 	@NotNull
-	private LocalDate dataNascimento;
+	private String dataNascimento;
 	
 	private LocalDateTime momentoDoDacastro;
 	private LocalDateTime dataHoraDaultimaAlteracao;

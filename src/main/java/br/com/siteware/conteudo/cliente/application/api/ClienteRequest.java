@@ -1,7 +1,5 @@
 package br.com.siteware.conteudo.cliente.application.api;
 
-import java.time.LocalDate;
-
 import br.com.siteware.conteudo.cliente.domain.enuns.Sexo;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
@@ -25,6 +23,6 @@ public class ClienteRequest {
 	@NotNull
 	private Sexo sexo;
 	@NotNull
-	private LocalDate dataNascimento;
+	private String dataNascimento;
 
 }

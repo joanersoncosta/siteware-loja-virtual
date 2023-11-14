@@ -1,6 +1,5 @@
 package br.com.siteware.conteudo.cliente.application.api;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 import br.com.siteware.conteudo.cliente.domain.Cliente;
@@ -14,7 +13,7 @@ public class ClienteDetalhadoResponse {
 	private String email;
 	private String telefone;
 	private Sexo sexo;
-	private LocalDate dataNascimento;
+	private String dataNascimento;
 	
 	private ClienteDetalhadoResponse(Cliente cliente) {
 		this.idCliente = cliente.getIdCliente();

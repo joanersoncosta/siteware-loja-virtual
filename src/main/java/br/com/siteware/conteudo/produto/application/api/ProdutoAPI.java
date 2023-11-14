@@ -37,7 +37,7 @@ public interface ProdutoAPI {
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void deleteProdutoPorId(@RequestParam(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
 	
-	@PatchMapping(value = "/{idProduto}altera-produto")
+	@PatchMapping(value = "/{idProduto}/altera-produto")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void patchPedido(@RequestParam(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoAlteracaoRequest produtoAlteracaoRequest);
 

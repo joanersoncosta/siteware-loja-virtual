@@ -1,13 +1,14 @@
 package br.com.siteware.conteudo.cliente.application.api;
 
-import java.time.LocalDate;
-
 import br.com.siteware.conteudo.cliente.domain.enuns.Sexo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Value
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@Getter
 public class ClienteAlteracaoRequest {
 	@NotBlank
 	private String nome;
@@ -16,5 +17,5 @@ public class ClienteAlteracaoRequest {
 	@NotNull
 	private Sexo sexo;
 	@NotNull
-	private LocalDate dataNascimento;
+	private String dataNascimento;
 }
