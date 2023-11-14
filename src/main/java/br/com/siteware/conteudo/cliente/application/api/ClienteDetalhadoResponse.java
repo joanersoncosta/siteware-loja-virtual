@@ -16,12 +16,16 @@ public class ClienteDetalhadoResponse {
 	private Sexo sexo;
 	private LocalDate dataNascimento;
 	
-	public ClienteDetalhadoResponse(Cliente cliente) {
+	private ClienteDetalhadoResponse(Cliente cliente) {
 		this.idCliente = cliente.getIdCliente();
 		this.nome = cliente.getNome();
 		this.email = cliente.getEmail();
 		this.telefone = cliente.getTelefone();
 		this.sexo = cliente.getSexo();
 		this.dataNascimento = cliente.getDataNascimento();
+	}
+	
+	public static ClienteDetalhadoResponse converteClienteParaResponse(Cliente cliente) {
+		return new ClienteDetalhadoResponse(cliente);
 	}
 }

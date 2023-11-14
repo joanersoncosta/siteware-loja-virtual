@@ -42,9 +42,11 @@ private final ClientRepository clientRepository;
 	@Override
 	public ClienteDetalhadoResponse buscaClientePorId(UUID idCliente) {
 		log.info("[inicia] ClienteApplicationService - buscaClientePorId");
-		Cliente cliente = clientRepository.buscaClientePorId(idCliente).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado!"));
+		var clienteResponse = clientRepository.buscaClientePorId(idCliente)
+				.map(ClienteDetalhadoResponse::converteClienteParaResponse)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado!"));
 		log.info("[finaliza] ClienteApplicationService - buscaClientePorId");
-		return new ClienteDetalhadoResponse(cliente);
+		return clienteResponse;
 	}
 
 	@Override
@@ -56,13 +58,13 @@ private final ClientRepository clientRepository;
 	}
 
 	@Override
-	public void patchAlteraPessoa(UUID idCliente, ClienteAlteracaoRequest clienteAlteracaoRequest) {
-		log.info("[inicia] ClienteApplicationService - patchAlteraPessoa");
+	public void patchAlteraCliente(UUID idCliente, ClienteAlteracaoRequest clienteAlteracaoRequest) {
+		log.info("[inicia] ClienteApplicationService - patchAlteraCliente");
 		Cliente cliente = clientRepository.buscaClientePorId(idCliente).orElseThrow(() -> 
 			APIException.build(HttpStatus.NOT_FOUND, "Cliente não encontrado!"));
 		cliente.altera(clienteAlteracaoRequest);
 		clientRepository.salvaCliente(cliente);
-		log.info("[finaliza] ClienteApplicationService - patchAlteraPessoa");
+		log.info("[finaliza] ClienteApplicationService - patchAlteraCliente");
 	}
 
 }

@@ -7,9 +7,9 @@ import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.Getter;
 
-@Value
+@Getter
 public class ClienteRequest {
 	@NotBlank
 	private String nome;
