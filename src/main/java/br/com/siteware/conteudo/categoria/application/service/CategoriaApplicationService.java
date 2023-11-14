@@ -41,9 +41,11 @@ public class CategoriaApplicationService implements CategoriaService {
 	@Override
 	public CategoriaDetalhadoResponse buscaCategoriaPorId(UUID idCategoria) {
 		log.info("[inicia] CategoriaApplicationService - buscaCategoriaPorId");
-		Categoria categoria = categoriaRepository.buscaCategoriaPorId(idCategoria).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Categoria não encontrado!"));
+		var categoriaDetalhadoresponse = categoriaRepository.buscaCategoriaPorId(idCategoria)
+				.map(CategoriaDetalhadoResponse::converteCategoriaParaResponse)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Categoria não encontrado!"));
 		log.info("[finaliza] CategoriaApplicationService - buscaCategoriaPorId");
-		return new CategoriaDetalhadoResponse(categoria);
+		return categoriaDetalhadoresponse;
 	}
 
 	@Override

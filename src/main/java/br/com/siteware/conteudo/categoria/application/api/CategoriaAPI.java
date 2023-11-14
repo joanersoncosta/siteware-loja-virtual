@@ -18,19 +18,19 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/v1/categoria")
 public interface CategoriaAPI {
-	@PostMapping
+	@PostMapping(value = "/cadastra-categoria")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	CategoriaIdResponse postCategoria(@RequestBody @Valid CategoriaRequest CategoriaRequest);
 
-	@GetMapping
+	@GetMapping(value = "/busca-categorias")
 	@ResponseStatus(value = HttpStatus.OK)
 	List<CategoriaListResponse> buscaTodasCategorias();
 
-	@GetMapping(value = "/{idCategoria}")
+	@GetMapping(value = "/{idCategoria}/busca-categoria")
 	@ResponseStatus(value = HttpStatus.OK)
 	CategoriaDetalhadoResponse getBuscaCategoriaPorId(@PathVariable(value = "idCategoria") UUID idCategoria);
 
-	@DeleteMapping(value = "/{idCategoria}")
+	@DeleteMapping(value = "/{idCategoria}/deleta-categoria")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void deletaCategoriaPorId(@PathVariable(value = "idCategoria") UUID idCategoria);
 

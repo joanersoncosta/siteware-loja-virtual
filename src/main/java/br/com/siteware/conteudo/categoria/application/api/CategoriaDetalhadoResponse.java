@@ -10,8 +10,12 @@ public class CategoriaDetalhadoResponse {
 	private UUID idCategoria;
 	private String nome;
 	
-	public CategoriaDetalhadoResponse(Categoria categoria) {
+	private CategoriaDetalhadoResponse(Categoria categoria) {
 		this.idCategoria = categoria.getIdCategoria();
 		this.nome = categoria.getNome();
+	}
+	
+	public static CategoriaDetalhadoResponse converteCategoriaParaResponse(Categoria categoria) {
+		return new CategoriaDetalhadoResponse(categoria);
 	}
 }

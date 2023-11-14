@@ -42,9 +42,9 @@ public class CategoriaInfraRepository implements CategoriaRepository {
 
 	@Override
 	public Optional<Categoria> buscaCategoriaPorId(UUID idCategoria) {
-		log.info("[inicia] CategoriaInfraRepository - buscaTodasCategorias");
+		log.info("[inicia] CategoriaInfraRepository - buscaCategoriaPorId");
 		Optional<Categoria> categoria = categoriaSpringDataJPARepository.findById(idCategoria);
-		log.info("[finaliza] CategoriaInfraRepository - buscaTodasCategorias");
+		log.info("[finaliza] CategoriaInfraRepository - buscaCategoriaPorId");
 		return categoria;
 	}
 
