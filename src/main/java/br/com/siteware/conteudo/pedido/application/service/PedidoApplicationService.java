@@ -42,8 +42,6 @@ public class PedidoApplicationService implements PedidoService {
 		var pedidoResponse = pedidoRepository.buscaPedidoPorId(idPedido)
 				.map(PedidoDetalhadoResponse::convertePedidoParaResponse)
 				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
-//		pedidoRepository.salvaPedido(pedido);
-		
 		log.info("[finaliza] PedidoApplicationService - buscaPedidoPorId");
 		return pedidoResponse;
 	}
