@@ -57,13 +57,20 @@ public class Pedido {
 
 	public void alteraTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
 		this.total = getTotalPedido(carrinhoProdutos);
+		mudaStatusParaAguardandoPagamento(total);
 	}
 
-	public Double getTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
+	private Double getTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
 		Double soma = 0.0;
+		
 		for (CarrinhoProduto produtos : carrinhoProdutos) {
 			soma += produtos.getSubTotal();
 		}
 		return soma;
+	}
+	
+	private PedidoStatus mudaStatusParaAguardandoPagamento(Double total) {
+		if(total > 0.0) return this.pedidoStatus = PedidoStatus.AGUARDANDO_PAGAMENTO;
+		return this.pedidoStatus = PedidoStatus.CANCELADO;
 	}
 }

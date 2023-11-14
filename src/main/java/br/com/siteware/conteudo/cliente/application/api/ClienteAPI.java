@@ -20,23 +20,23 @@ import jakarta.validation.Valid;
 @RequestMapping("/v1/cliente")
 public interface ClienteAPI {
 	
-	@PostMapping
+	@PostMapping(value = "/login")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	ClienteIdResponse postCliente(@RequestBody @Valid ClienteRequest ClienteRequest);
 
-	@GetMapping
+	@GetMapping(value = "/{idCliente}/busca-todos-clientes")
 	@ResponseStatus(value = HttpStatus.OK)
 	List<ClienteListResponse> getTodasClientes();
 	
-	@GetMapping(value = "/{idCliente}")
+	@GetMapping(value = "/{idCliente}/busca-cliente")
 	@ResponseStatus(value = HttpStatus.OK)
 	ClienteDetalhadoResponse getBuscaClientePorId(@PathVariable(value = "idCliente") UUID idCliente);
 	
-	@DeleteMapping(value = "/{idCliente}")
+	@DeleteMapping(value = "/{idCliente}/deleta-cliente")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void deletaClientePorId(@PathVariable(value = "idCliente") UUID idCliente);
 	
-	@PatchMapping(value = "/{idCliente}")
+	@PatchMapping(value = "/{idCliente}/altera-dados-cliente")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void patchAlteraPessoa(@PathVariable(value = "idCliente") UUID idCliente, @RequestBody @Valid ClienteAlteracaoRequest clienteAlteracaoRequest);
 

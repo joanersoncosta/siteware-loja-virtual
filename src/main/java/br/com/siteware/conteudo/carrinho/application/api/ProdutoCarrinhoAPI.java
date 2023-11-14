@@ -20,20 +20,20 @@ import jakarta.validation.Valid;
 @RequestMapping("/carrinho-produto")
 public interface ProdutoCarrinhoAPI {
 
-	@PostMapping(path = "/adicionaProdutoCarrinho")
+	@PostMapping(path = "/adiciona")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @RequestParam(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoCarrinhoRequest produtoRequest);
 
-	@GetMapping(path = "/buscaTodosProdutosCarrinho")
+	@GetMapping(path = "/busca-todos-produtos-carrinho")
 	@ResponseStatus(value = HttpStatus.OK)
 	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido);
 	
-	@PostMapping(path = "/{idPedidoCarrinho}/incrementaQuantidadeProdutoCarrinho")
+	@PostMapping(path = "/{idPedidoCarrinho}/incrementa-quantidade-produto-arrinho")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void incrementaQuantidadeProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinho, @RequestBody @Valid ProdutoCarrinhoRequest produtoCarrinhoRequest);
 
-	@DeleteMapping(path = "/{idPedidoCarrinho}/removeProdutoCarrinho")
+	@DeleteMapping(path = "/{idPedidoCarrinho}/remove-produto-carrinho")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	void removeProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinhoprodutoCarrinhoRequest);
+	void removeProdutoCarrinho(@RequestParam(value = "idCliente") UUID idCliente, @RequestParam(value = "idPedido") UUID idPedido, @PathVariable(value = "idPedidoCarrinho") UUID idPedidoCarrinho);
 
 }

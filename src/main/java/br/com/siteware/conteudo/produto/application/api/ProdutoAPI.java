@@ -21,24 +21,24 @@ import jakarta.validation.Valid;
 @RequestMapping("/v1/produto")
 public interface ProdutoAPI {
 	
-	@PostMapping(path = "/post")
+	@PostMapping(path = "/cadastra-produto")
 	@ResponseStatus(value = HttpStatus.CREATED)
 	ProdutoIdResponse postProduto(@RequestParam(value = "idCategoria") UUID idCategoria, @RequestBody @Valid ProdutoRequest produtoRequest);
 
-	@GetMapping(path = "/{idProduto}")
+	@GetMapping(path = "/{idProduto}/busca-produto")
 	@ResponseStatus(value = HttpStatus.OK)
 	ProdutoDetalhadoResponse buscaProdutoPorId(@PathVariable(value = "idProduto") UUID idProduto);
 
-	@GetMapping(path = "/categoria/{idCategoria}")
+	@GetMapping(path = "/busca-produtos")
 	@ResponseStatus(value = HttpStatus.OK)
-	List<ProdutoCategoriaListResponse> buscaTodosProdutos(@PathVariable(value = "idCategoria") UUID idCategoria);
+	List<ProdutoCategoriaListResponse> buscaTodosProdutos(@RequestParam(value = "idCategoria") UUID idCategoria);
 
-	@DeleteMapping(path = "/{idProduto}/categoria/{idCategoria}")
+	@DeleteMapping(path = "/{idProduto}/deleta-produto")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	void deleteProdutoPorId(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
+	void deleteProdutoPorId(@RequestParam(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto);
 	
-	@PatchMapping(value = "/{idProduto}/categoria/{idCategoria}")
+	@PatchMapping(value = "/{idProduto}altera-produto")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	void patchPedido(@PathVariable(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoAlteracaoRequest produtoAlteracaoRequest);
+	void patchPedido(@RequestParam(value = "idCategoria") UUID idCategoria, @PathVariable(value = "idProduto") UUID idProduto, @RequestBody @Valid ProdutoAlteracaoRequest produtoAlteracaoRequest);
 
 }
