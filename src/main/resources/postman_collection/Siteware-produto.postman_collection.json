@@ -1,0 +1,611 @@
+{
+	"info": {
+		"_postman_id": "24922152-3a8c-4c6d-a597-097e1872853e",
+		"name": "Siteware-produto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25179630",
+		"_collection_link": "https://www.postman.com/blue-moon-159961/workspace/bootcamp-api-petz/collection/25179630-24922152-3a8c-4c6d-a597-097e1872853e?action=share&source=collection_link&creator=25179630"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "postCliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Alex Silva Santos\",\r\n    \"email\": \"alex@gmail.com\",\r\n    \"telefone\":\"7399999999\",\r\n    \"sexo\":\"MASCULINO\",\r\n    \"dataNascimento\":\"2001-05-12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/siteware/api/v1/cliente/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos os Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/siteware/api/v1/cliente/busca-todos-clientes"
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Cliente por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/siteware/api/v1/cliente/{{idCliente}}/busca-cliente"
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Cliente Por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/siteware/api/v1/cliente/{{idCliente}}/deleta-cliente"
+					},
+					"response": []
+				},
+				{
+					"name": "Altera Cliente por Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"\",\r\n    \"telefone\":\"\",\r\n    \"sexo\":\"\",\r\n    \"dataNascimento\":\"2023-05-12\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/siteware/api/v1/cliente/{{idCliente}}/altera-dados-cliente"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categoria",
+			"item": [
+				{
+					"name": "cadastra categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\":\"Eletronico\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/siteware/api/v1/categoria/cadastra-categoria"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todas as Categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/siteware/api/v1/categoria/busca-categorias"
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Categoria por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/siteware/api/v1/categoria/{{idCategoria}}/busca-categoria"
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Categoria Por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/siteware/api/v1/categoria/{{idCategoria}}/deleta-categoria"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pedido",
+			"item": [
+				{
+					"name": "Cadastrar Pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\": \"Siteware\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/pedido/cria-pedido?idCliente={{idCliente}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"pedido",
+								"cria-pedido"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "{{idCliente}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos os Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/pedido/busca-pedidos?idCliente={{idCliente}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"pedido",
+								"busca-pedidos"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "{{idCliente}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Pedido por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/pedido/{{idPedido}}/busca-pedido?idCliente={{idCliente}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"pedido",
+								"{{idPedido}}",
+								"busca-pedido"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "{{idCliente}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Pedido Por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/pedido/{{idPedido}}/deleta-pedido?idCliente={{idCliente}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"pedido",
+								"{{idPedido}}",
+								"deleta-pedido"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "{{idCliente}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera Pedido por Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descricao\":\"Lista de compras\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/pedido/{{idPedido}}/altera-pedido?idCliente={{idCliente}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"pedido",
+								"{{idPedido}}",
+								"altera-pedido"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "{{idCliente}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Adiciona Produto ao carrinho",
+			"item": [
+				{
+					"name": "Adiciona produto ao carrinho",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantidade\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/carrinho-produto/adiciona-produto?idCliente={{idCliente}}&idPedido={{idPedido}}&idProduto={{idProduto}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"carrinho-produto",
+								"adiciona-produto"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "{{idCliente}}"
+								},
+								{
+									"key": "idPedido",
+									"value": "{{idPedido}}"
+								},
+								{
+									"key": "idProduto",
+									"value": "{{idProduto}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos os Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/carrinho-produto/busca-todos-produtos-carrinho?idCliente={{idCliente}}&idPedido={{idPedido}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"carrinho-produto",
+								"busca-todos-produtos-carrinho"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "{{idCliente}}"
+								},
+								{
+									"key": "idPedido",
+									"value": "{{idPedido}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incrementa quantidade Pedidos por Id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"quantidade\": \"3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/carrinho-produto/{{idCarrinhoProduto}}/atualiza-quantidade-produto-arrinho?idCliente={{idCliente}}&idPedido={{idPedido}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"carrinho-produto",
+								"{{idCarrinhoProduto}}",
+								"atualiza-quantidade-produto-arrinho"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "{{idCliente}}"
+								},
+								{
+									"key": "idPedido",
+									"value": "{{idPedido}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Produto Por Id do Carrinho",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/carrinho-produto/{{idCarrinhoProduto}}/remove-produto-carrinho?idCliente={{idCliente}}&idPedido={{idPedido}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"carrinho-produto",
+								"{{idCarrinhoProduto}}",
+								"remove-produto-carrinho"
+							],
+							"query": [
+								{
+									"key": "idCliente",
+									"value": "{{idCliente}}"
+								},
+								{
+									"key": "idPedido",
+									"value": "{{idPedido}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produto",
+			"item": [
+				{
+					"name": "Cadastrar Produto",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Celular\",\r\n    \"descricao\": \"62 Gigas e camera frontal!\",\r\n    \"preco\": \"78.8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/v1/produto/cadastra-produto?idCategoria={{idCategoria}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"v1",
+								"produto",
+								"cadastra-produto"
+							],
+							"query": [
+								{
+									"key": "idCategoria",
+									"value": "{{idCategoria}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos os Produtos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/v1/produto/busca-produtos?idCategoria={{idCategoria}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"v1",
+								"produto",
+								"busca-produtos"
+							],
+							"query": [
+								{
+									"key": "idCategoria",
+									"value": "{{idCategoria}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca Produto Por por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/siteware/api/v1/produto/{{idProduto}}/busca-produto"
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta Produto Por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/v1/produto/{{idProduto}}/deleta-produto?idCategoria={{idCategoria}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"v1",
+								"produto",
+								"{{idProduto}}",
+								"deleta-produto"
+							],
+							"query": [
+								{
+									"key": "idCategoria",
+									"value": "{{idCategoria}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera Produto por Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Celular\",\r\n    \"descricao\": \"Apple\",\r\n    \"preco\": \"1230.45\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/siteware/api/v1/produto/{{idProduto}}/aplica-promocao?idCategoria={{idCategoria}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"siteware",
+								"api",
+								"v1",
+								"produto",
+								"{{idProduto}}",
+								"aplica-promocao"
+							],
+							"query": [
+								{
+									"key": "idCategoria",
+									"value": "{{idCategoria}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teste Home Api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/siteware/api/"
+			},
+			"response": []
+		}
+	]
+}
