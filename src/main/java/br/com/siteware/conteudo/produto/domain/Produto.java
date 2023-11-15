@@ -2,8 +2,11 @@ package br.com.siteware.conteudo.produto.domain;
 
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+
 import br.com.siteware.conteudo.categoria.application.api.CategoriaDetalhadoResponse;
 import br.com.siteware.conteudo.categoria.domain.Categoria;
+import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.produto.application.api.ProdutoAlteracaoRequest;
 import br.com.siteware.conteudo.produto.application.api.ProdutoRequest;
 import jakarta.persistence.Column;
@@ -51,6 +54,12 @@ public class Produto{
 		this.nome = produtoAlteracaoRequest.getNome();
 		this.descricao = produtoAlteracaoRequest.getDescricao();
 		this.preco = produtoAlteracaoRequest.getPreco();
+	}
+	
+	public void pertenceACategoria(CategoriaDetalhadoResponse categoria) {
+		if (!this.idCategoria.equals(categoria.getIdCategoria())) {
+			throw APIException.build(HttpStatus.UNAUTHORIZED, "Produto não pertence a Categoria solicitada!");
+		}
 	}
 	
 }

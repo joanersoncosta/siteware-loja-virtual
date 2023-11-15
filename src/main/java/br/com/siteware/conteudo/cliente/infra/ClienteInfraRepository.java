@@ -53,7 +53,6 @@ public class ClienteInfraRepository implements ClientRepository {
 		log.info("[inicia] ClienteInfraRepository - buscaTodasPessoas");
 		clientSpringDataJPARepository.delete(cliente);
 		log.info("[inicia] ClienteInfraRepository - buscaTodasPessoas");
-		
 	}
 
 }

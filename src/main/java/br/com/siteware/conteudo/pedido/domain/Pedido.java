@@ -4,7 +4,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+
 import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
+import br.com.siteware.conteudo.cliente.application.api.ClienteDetalhadoResponse;
+import br.com.siteware.conteudo.handler.APIException;
 import br.com.siteware.conteudo.pedido.application.api.PedidoAlteracaoRequest;
 import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.domain.enuns.PedidoStatus;
@@ -57,20 +61,33 @@ public class Pedido {
 
 	public void alteraTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
 		this.total = getTotalPedido(carrinhoProdutos);
-		mudaStatusParaAguardandoPagamento(total);
+		mudaStatusParaAguardandoPagamentoOrElseCancelado(total);
 	}
 
-	private Double getTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
-		Double soma = 0.0;
-		
-		for (CarrinhoProduto produtos : carrinhoProdutos) {
-			soma += produtos.getSubTotal();
+	public void pertenceAoCliente(ClienteDetalhadoResponse cliente) {
+		if (!this.idCliente.equals(cliente.getIdCliente())) {
+			throw APIException.build(HttpStatus.UNAUTHORIZED, "Usuário não é dono do Pedido solicitado!");
 		}
+	}
+
+//	private Double getTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
+//		Double soma = 0.0;
+//		
+//		for (CarrinhoProduto produtos : carrinhoProdutos) {
+//			soma += produtos.getSubTotal();
+//		}
+//		return soma;
+//	}
+	private Double getTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
+		Double soma = carrinhoProdutos.stream()
+				.map(p -> p.getSubTotal())
+				.reduce(0.0, (x, y) -> x + y);
 		return soma;
 	}
-	
-	private PedidoStatus mudaStatusParaAguardandoPagamento(Double total) {
-		if(total > 0.0) return this.pedidoStatus = PedidoStatus.AGUARDANDO_PAGAMENTO;
+
+	private PedidoStatus mudaStatusParaAguardandoPagamentoOrElseCancelado(Double total) {
+		if (total > 0.0)
+			return this.pedidoStatus = PedidoStatus.AGUARDANDO_PAGAMENTO;
 		return this.pedidoStatus = PedidoStatus.CANCELADO;
 	}
 }

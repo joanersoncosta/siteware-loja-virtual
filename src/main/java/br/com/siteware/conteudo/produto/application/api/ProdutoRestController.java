@@ -53,11 +53,11 @@ public class ProdutoRestController implements ProdutoAPI {
 	}
 
 	@Override
-	public void patchPedido(UUID idCategoria, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest) {
-		log.info("[inicia] ProdutoRestController - patchPedido");
+	public void alteraProduto(UUID idCategoria, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest) {
+		log.info("[inicia] ProdutoRestController - alteraProduto");
 		log.info("[idCategoria] {}, [idProduto] {}", idCategoria, idProduto);
 		produtoService.alteraProduto(idCategoria, idProduto, produtoAlteracaoRequest);
-		log.info("[finaliza] ProdutoRestController - patchPedido");
+		log.info("[finaliza] ProdutoRestController - alteraProduto");
 	}
 
 }

@@ -2,6 +2,8 @@ package br.com.siteware.conteudo.categoria.domain;
 
 import java.util.UUID;
 
+import org.hibernate.annotations.Cascade;
+
 import br.com.siteware.conteudo.categoria.application.api.CategoriaRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

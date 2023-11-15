@@ -13,6 +13,6 @@ public interface ProdutoCarrinhoService {
 			ProdutoCarrinhoRequest produtoRequest);
 	List<ProdutoCarrinhoListResponse> buscaTodosProdutosCarrinho(UUID idCliente, UUID idPedido);
 	ProdutoCarrinhoDetalhadoResponse buscaProdutoPorId(UUID idPedidoCarrinho);
-	void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho, ProdutoCarrinhoRequest produtoCarrinhoRequest);
+	void atualizaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho, ProdutoCarrinhoRequest produtoCarrinhoRequest);
 	void removeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho);
 }

@@ -6,9 +6,9 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import br.com.siteware.conteudo.categoria.application.api.CategoriaDetalhadoResponse;
 import br.com.siteware.conteudo.categoria.application.service.CategoriaService;
 import br.com.siteware.conteudo.handler.APIException;
-import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoAlteracaoRequest;
 import br.com.siteware.conteudo.produto.application.api.ProdutoCategoriaListResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
@@ -57,9 +57,10 @@ public class ProdutoApplicationService implements ProdutoService {
 	@Override
 	public void deleteProdutoPorId(UUID idCategoria, UUID idProduto) {
 		log.info("[inicia] ProdutoRestController - deleteProdutoPorId");
-		categoriaService.buscaCategoriaPorId(idCategoria);
+		CategoriaDetalhadoResponse categoria = categoriaService.buscaCategoriaPorId(idCategoria);
 		Produto produto = produtoRepository.buscaProdutoPorId(idProduto)
 				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		produto.pertenceACategoria(categoria);
 		produtoRepository.deleteProdutoPorId(produto);
 		log.info("[finaliza] ProdutoRestController - deleteProdutoPorId");
 	}
@@ -67,9 +68,10 @@ public class ProdutoApplicationService implements ProdutoService {
 	@Override
 	public void alteraProduto(UUID idCategoria, UUID idProduto, ProdutoAlteracaoRequest produtoAlteracaoRequest) {
 		log.info("[inicia] ProdutoRestController - alteraProduto");
-		categoriaService.buscaCategoriaPorId(idCategoria);
+		CategoriaDetalhadoResponse categoria = categoriaService.buscaCategoriaPorId(idCategoria);
 		Produto produto = produtoRepository.buscaProdutoPorId(idProduto)
 				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		produto.pertenceACategoria(categoria);
 		produto.altera(produtoAlteracaoRequest);
 		produtoRepository.salvaProduto(produto);
 		log.info("[finaliza] ProdutoRestController - alteraProduto");

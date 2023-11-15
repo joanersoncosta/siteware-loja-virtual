@@ -2,8 +2,12 @@ package br.com.siteware.conteudo.carrinho.domain;
 
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
+
 import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
 import br.com.siteware.conteudo.carrinho.domain.enuns.StatusPromocao;
+import br.com.siteware.conteudo.handler.APIException;
+import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +34,10 @@ public class CarrinhoProduto {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idCarrinhoProduto", updatable = false, unique = true, nullable = false)
 	private UUID idCarrinhoProduto;
+	@Column(columnDefinition = "uuid", name = "idCliente", updatable = false)
+	private UUID idCliente;
+	@Column(columnDefinition = "uuid", name = "idPedido", updatable = false)
+	private UUID idPedido;
 	@Column(columnDefinition = "uuid", name = "idProduto", updatable = false, unique = true)
 	private UUID idProduto;
 
@@ -44,8 +52,10 @@ public class CarrinhoProduto {
 	private Double preco;
 	private int quantidade;
 
-	public CarrinhoProduto(UUID idProduto, ProdutoDetalhadoResponse produtoDetalhadoResponse,
+	public CarrinhoProduto(UUID idCliente, UUID idPedido, UUID idProduto, ProdutoDetalhadoResponse produtoDetalhadoResponse,
 			ProdutoCarrinhoRequest produtoRequest) {
+		this.idCliente = idCliente;
+		this.idPedido = idPedido;
 		this.idProduto = idProduto;
 		this.nome = produtoDetalhadoResponse.getNome();
 		this.descricao = produtoDetalhadoResponse.getDescricao();
@@ -82,5 +92,17 @@ public class CarrinhoProduto {
 		this.descricao = produtoAtualizado.getDescricao();
 		this.statusPromocao = setStatusPromocao(quantidade);
 		this.preco = produtoAtualizado.getPreco();
+	}
+	
+	public void pertenceAoProduto(ProdutoDetalhadoResponse produto) {
+		if (!this.idProduto.equals(produto.getIdProduto())) {
+			throw APIException.build(HttpStatus.UNAUTHORIZED, "Produto não pertence ao Carrinho solicitado!");
+		}
+	}
+	
+	public void pertenceAoPedido(PedidoDetalhadoResponse pedido) {
+		if (!this.idPedido.equals(pedido.getIdPedido())) {
+			throw APIException.build(HttpStatus.UNAUTHORIZED, "Carrinho não pertence ao Pedido solicitado!");
+		}
 	}
 }

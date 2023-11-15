@@ -24,7 +24,7 @@ public interface ClienteAPI {
 	@ResponseStatus(value = HttpStatus.CREATED)
 	ClienteIdResponse postCliente(@RequestBody @Valid ClienteRequest ClienteRequest);
 
-	@GetMapping(value = "/{idCliente}/busca-todos-clientes")
+	@GetMapping(value = "/busca-todos-clientes")
 	@ResponseStatus(value = HttpStatus.OK)
 	List<ClienteListResponse> getTodasClientes();
 	

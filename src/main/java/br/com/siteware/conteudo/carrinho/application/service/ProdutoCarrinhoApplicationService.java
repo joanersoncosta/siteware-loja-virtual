@@ -13,6 +13,7 @@ import br.com.siteware.conteudo.carrinho.application.api.ProdutoCarrinhoRequest;
 import br.com.siteware.conteudo.carrinho.application.repository.ProdutoCarrinhoRepository;
 import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
 import br.com.siteware.conteudo.handler.APIException;
+import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.pedido.application.service.PedidoService;
 import br.com.siteware.conteudo.produto.application.api.ProdutoDetalhadoResponse;
 import br.com.siteware.conteudo.produto.application.service.ProdutoService;
@@ -26,14 +27,15 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 	private final ProdutoService produtoService;
 	private final ProdutoCarrinhoRepository produtoCarrinhoRepository;
 	private final PedidoService pedidoService;
-	
+
 	@Override
 	public ProdutoCarrinhoIdResponse adicionaProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idProduto,
 			ProdutoCarrinhoRequest produtoRequest) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
 		pedidoService.buscaPedidoPorId(idCliente, idPedido);
-		ProdutoDetalhadoResponse produtoDetalhadoResponse = produtoService.buscaProdutoPorId(idProduto);
-		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.salvaProdutoCarrinho(new CarrinhoProduto(idProduto, produtoDetalhadoResponse, produtoRequest));
+		ProdutoDetalhadoResponse produto = produtoService.buscaProdutoPorId(idProduto);
+		CarrinhoProduto carrinhoProduto = produtoCarrinhoRepository.salvaProdutoCarrinho(
+				new CarrinhoProduto(idCliente, idPedido, idProduto, produto, produtoRequest));
 		atualizaTotalPedido(idCliente, idPedido);
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - adicionaProdutoCarrinho");
 		return ProdutoCarrinhoIdResponse.builder().idCarrinhoProduto(carrinhoProduto.getIdCarrinhoProduto()).build();
@@ -47,7 +49,7 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - buscaTodosProdutosCarrinho");
 		return ProdutoCarrinhoListResponse.converte(produtosCarrinho);
 	}
-	
+
 	@Override
 	public ProdutoCarrinhoDetalhadoResponse buscaProdutoPorId(UUID idPedidoCarrinho) {
 		log.info("[inicia] ProdutoRestController - buscaProdutoPorId");
@@ -59,16 +61,19 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 	}
 
 	@Override
-	public void incrementaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho, ProdutoCarrinhoRequest produtoCarrinhoRequest) {
-		log.info("[inicia] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
-		pedidoService.buscaPedidoPorId(idCliente, idPedido);
-		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+	public void atualizaQuantidadeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho,
+			ProdutoCarrinhoRequest produtoCarrinhoRequest) {
+		log.info("[inicia] ProdutoCarrinhoApplicationService - atualizaQuantidadeProdutoCarrinho");
+		PedidoDetalhadoResponse pedido = pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		produto.pertenceAoPedido(pedido);
 		produto.alteraQuantidade(produto, produtoCarrinhoRequest);
 		produtoCarrinhoRepository.salvaProdutoCarrinho(produto);
 		atualizaTotalPedido(idCliente, idPedido);
-		log.info("[finaliza] ProdutoCarrinhoApplicationService - incrementaQuantidadeProdutoCarrinho");
+		log.info("[finaliza] ProdutoCarrinhoApplicationService - atualizaQuantidadeProdutoCarrinho");
 	}
-	
+
 	private void atualizaTotalPedido(UUID idCliente, UUID idPedido) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - atualizaPedido");
 		List<CarrinhoProduto> produtosCarrinho = produtoCarrinhoRepository.buscaTodosProdutosCarrinho();
@@ -79,8 +84,10 @@ public class ProdutoCarrinhoApplicationService implements ProdutoCarrinhoService
 	@Override
 	public void removeProdutoCarrinho(UUID idCliente, UUID idPedido, UUID idPedidoCarrinho) {
 		log.info("[inicia] ProdutoCarrinhoApplicationService - removeProdutoCarrinho");
-		pedidoService.buscaPedidoPorId(idCliente, idPedido);
-		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		PedidoDetalhadoResponse pedido = pedidoService.buscaPedidoPorId(idCliente, idPedido);
+		CarrinhoProduto produto = produtoCarrinhoRepository.buscaProdutoPorId(idPedidoCarrinho)
+				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Produto não encontrado!"));
+		produto.pertenceAoPedido(pedido);
 		produtoCarrinhoRepository.removeProdutoCarrinho(produto);
 		atualizaTotalPedido(idCliente, idPedido);
 		log.info("[finaliza] ProdutoCarrinhoApplicationService - removeProdutoCarrinho");

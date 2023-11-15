@@ -67,5 +67,4 @@ private final ClientRepository clientRepository;
 		clientRepository.salvaCliente(cliente);
 		log.info("[finaliza] ClienteApplicationService - patchAlteraCliente");
 	}
-
 }
