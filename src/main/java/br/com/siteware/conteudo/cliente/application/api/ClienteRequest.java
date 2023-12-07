@@ -1,7 +1,6 @@
 package br.com.siteware.conteudo.cliente.application.api;
 
 import br.com.siteware.conteudo.cliente.domain.enuns.Sexo;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,7 +15,6 @@ public class ClienteRequest {
 	private String nome;
 	@NotBlank
 	@Email
-	@Column(unique = true)
 	private String email;
 	@NotBlank
 	private String telefone;

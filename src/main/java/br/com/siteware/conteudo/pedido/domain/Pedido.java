@@ -70,14 +70,6 @@ public class Pedido {
 		}
 	}
 
-//	private Double getTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
-//		Double soma = 0.0;
-//		
-//		for (CarrinhoProduto produtos : carrinhoProdutos) {
-//			soma += produtos.getSubTotal();
-//		}
-//		return soma;
-//	}
 	private Double getTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
 		Double soma = carrinhoProdutos.stream()
 				.map(p -> p.getSubTotal())
