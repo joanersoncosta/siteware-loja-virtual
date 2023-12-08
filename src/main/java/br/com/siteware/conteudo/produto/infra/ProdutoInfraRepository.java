@@ -42,9 +42,9 @@ public class ProdutoInfraRepository implements ProdutoRepository {
 	}
 
 	@Override
-	public List<Produto> buscaTodosProdutos() {
+	public List<Produto> buscaTodosProdutos(UUID idCategoria) {
 		log.info("[inicia] ProdutoInfraRepository - buscaTodosProdutos");
-		List<Produto> produtos = produtoSpringDataJPARepository.findAll();
+		List<Produto> produtos = produtoSpringDataJPARepository.findAllByIdCategoria(idCategoria);
 		log.info("[finaliza] ProdutoInfraRepository - buscaTodosProdutos");
 		return produtos;
 	}

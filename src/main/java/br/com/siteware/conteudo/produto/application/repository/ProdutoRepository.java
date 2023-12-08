@@ -9,6 +9,6 @@ import br.com.siteware.conteudo.produto.domain.Produto;
 public interface ProdutoRepository {
 	Produto salvaProduto(Produto produto);
 	Optional<Produto> buscaProdutoPorId(UUID idProduto);
-	List<Produto> buscaTodosProdutos();
+	List<Produto> buscaTodosProdutos(UUID idCategoria);
 	void deleteProdutoPorId(Produto produto);
 }

@@ -49,7 +49,7 @@ public class ProdutoApplicationService implements ProdutoService {
 	public List<ProdutoCategoriaListResponse> buscaTodosProdutos(UUID idCategoria) {
 		log.info("[inicia] ProdutoRestController - buscaTodosProdutos");
 		categoriaService.buscaCategoriaPorId(idCategoria);
-		List<Produto> produtos = produtoRepository.buscaTodosProdutos();
+		List<Produto> produtos = produtoRepository.buscaTodosProdutos(idCategoria);
 		log.info("[finaliza] ProdutoRestController - buscaTodosProdutos");
 		return ProdutoCategoriaListResponse.converte(produtos);
 	}
