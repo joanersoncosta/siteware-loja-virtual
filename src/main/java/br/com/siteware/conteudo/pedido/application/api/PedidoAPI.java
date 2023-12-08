@@ -23,7 +23,7 @@ public interface PedidoAPI {
 	
 	@PostMapping(path = "/cria-pedido")
 	@ResponseStatus(value = HttpStatus.CREATED)
-	PedidoIdResponse postPedido(@RequestParam(value = "idCliente") UUID idCliente, @RequestBody @Valid PedidoRequest pedidoRequest);
+	PedidoIdResponse postPedido(@RequestParam(value = "idCliente") UUID idCliente);
 	
 	@GetMapping(path = "/{idPedido}/busca-pedido")
 	@ResponseStatus(value = HttpStatus.OK)

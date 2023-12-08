@@ -10,11 +10,9 @@ import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
 import br.com.siteware.conteudo.cliente.application.api.ClienteDetalhadoResponse;
 import br.com.siteware.conteudo.cliente.application.service.ClienteService;
 import br.com.siteware.conteudo.handler.APIException;
-import br.com.siteware.conteudo.pedido.application.api.PedidoAlteracaoRequest;
 import br.com.siteware.conteudo.pedido.application.api.PedidoClienteListResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoDetalhadoResponse;
 import br.com.siteware.conteudo.pedido.application.api.PedidoIdResponse;
-import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.application.repository.PedidoRepository;
 import br.com.siteware.conteudo.pedido.domain.Pedido;
 import lombok.RequiredArgsConstructor;
@@ -28,10 +26,10 @@ public class PedidoApplicationService implements PedidoService {
 	private final ClienteService clienteServicce;
 	
 	@Override
-	public PedidoIdResponse salvaPedido(UUID idCliente, PedidoRequest pedidoRequest) {
+	public PedidoIdResponse salvaPedido(UUID idCliente) {
 		log.info("[inicia] PedidoApplicationService - salvaPedido");
 		clienteServicce.buscaClientePorId(idCliente);
-		Pedido pedido = pedidoRepository.salvaPedido(new Pedido(idCliente, pedidoRequest));
+		Pedido pedido = pedidoRepository.salvaPedido(new Pedido(idCliente));
 		log.info("[finaliza] PedidoApplicationService - salvaPedido");
 		return PedidoIdResponse.builder().idPedido(pedido.getIdPedido()).build();
 	}

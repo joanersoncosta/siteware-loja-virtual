@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import br.com.siteware.conteudo.carrinho.domain.CarrinhoProduto;
 import br.com.siteware.conteudo.cliente.application.api.ClienteDetalhadoResponse;
 import br.com.siteware.conteudo.handler.APIException;
-import br.com.siteware.conteudo.pedido.application.api.PedidoAlteracaoRequest;
-import br.com.siteware.conteudo.pedido.application.api.PedidoRequest;
 import br.com.siteware.conteudo.pedido.domain.enuns.PedidoStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,14 +21,19 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Entity
 public class Pedido {
-
+	@Builder.Default
+	private static final String DEFAULT = "Siteware - Líder no segmento de Gestão do Desempenho e da Estratégia Corporativa na América Latina.";
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(columnDefinition = "uuid", name = "idPedido", updatable = false, unique = true, nullable = false)
@@ -41,16 +44,15 @@ public class Pedido {
 	@NotNull
 	@Enumerated(value = EnumType.STRING)
 	private PedidoStatus pedidoStatus;
-	@NotBlank
-	@Size(message = "Campo descrição pedido não pode estar vazio", max = 255, min = 3)
-	private String descricao;
+	@Builder.Default
+	private String descricao = DEFAULT;
 	private LocalDateTime momentoDoPedido;
 	private Double total = 0.0;
 
-	public Pedido(UUID idCliente, PedidoRequest pedidoRequest) {
+	public Pedido(UUID idCliente) {
 		this.idCliente = idCliente;
 		this.pedidoStatus = PedidoStatus.PENDENTE;
-		this.descricao = pedidoRequest.getDescricao();
+		this.descricao = DEFAULT;
 		this.total = 0.0;
 		this.momentoDoPedido = LocalDateTime.now();
 	}

@@ -17,10 +17,10 @@ public class PedidoRestController implements PedidoAPI {
 	private final PedidoService pedidoService;
 	
 	@Override
-	public PedidoIdResponse postPedido(UUID idCliente, PedidoRequest pedidoRequest) {
+	public PedidoIdResponse postPedido(UUID idCliente) {
 	log.info("[inicia] PedidoRestController - postPedido");
 	log.info("[idCliente] {}", idCliente);
-	PedidoIdResponse pedidoIdResponse = pedidoService.salvaPedido(idCliente, pedidoRequest);
+	PedidoIdResponse pedidoIdResponse = pedidoService.salvaPedido(idCliente);
 	log.info("[finaliza] PedidoRestController - postPedido");
 	return pedidoIdResponse;
 	}
