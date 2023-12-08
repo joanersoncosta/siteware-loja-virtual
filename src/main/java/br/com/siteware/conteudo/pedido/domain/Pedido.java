@@ -55,10 +55,6 @@ public class Pedido {
 		this.momentoDoPedido = LocalDateTime.now();
 	}
 
-	public void altera(PedidoAlteracaoRequest pedidoAlteracaoRequest) {
-		this.descricao = pedidoAlteracaoRequest.getDescricao();
-	}
-
 	public void alteraTotalPedido(List<CarrinhoProduto> carrinhoProdutos) {
 		this.total = getTotalPedido(carrinhoProdutos);
 		mudaStatusParaAguardandoPagamentoOrElseCancelado(total);

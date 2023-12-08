@@ -36,9 +36,5 @@ public interface PedidoAPI {
 	@DeleteMapping(path = "/{idPedido}/deleta-pedido")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
 	void deletePedidoPorId(@RequestParam(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido);
-	
-	@PatchMapping(value = "/{idPedido}/altera-pedido")
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	void patchPedido(@RequestParam(value = "idCliente") UUID idCliente, @PathVariable(value = "idPedido") UUID idPedido, @RequestBody @Valid PedidoAlteracaoRequest pedidoAlteracaoRequest);
 
 }

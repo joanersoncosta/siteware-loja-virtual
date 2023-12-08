@@ -50,12 +50,4 @@ public class PedidoRestController implements PedidoAPI {
 		pedidoService.deletePedidoPorId(idCliente, idPedido);
 		log.info("[finaliza] PedidoRestController - deletePedidoPorId");
 	}
-
-	@Override
-	public void patchPedido(UUID idCliente, UUID idPedido, PedidoAlteracaoRequest pedidoAlteracaoRequest) {
-		log.info("[inicia] PedidoRestController - patchPedido");
-		log.info("[idCliente] {}, [idPedido] {}", idCliente, idPedido);	
-		pedidoService.alteraPedido(idCliente, idPedido, pedidoAlteracaoRequest);
-		log.info("[finaliza] PedidoRestController - patchPedido");		
-	}
 }

@@ -67,18 +67,6 @@ public class PedidoApplicationService implements PedidoService {
 	}
 
 	@Override
-	public void alteraPedido(UUID idCliente, UUID idPedido, PedidoAlteracaoRequest pedidoAlteracaoRequest) {
-		log.info("[inicia] PedidoApplicationService - alteraPedido");
-		ClienteDetalhadoResponse cliente = clienteServicce.buscaClientePorId(idCliente);	
-		Pedido pedido = pedidoRepository.buscaPedidoPorId(idPedido).orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Pedido não encontrado!"));
-		pedido.pertenceAoCliente(cliente);
-		pedido.altera(pedidoAlteracaoRequest);
-		pedidoRepository.salvaPedido(pedido);
-		log.info("[finaliza] PedidoApplicationService - alteraPedido");
-		
-	}
-	
-	@Override
 	public void alteraPedido(UUID idCliente, UUID idPedido, List<CarrinhoProduto> carrinhoProdutos) {
 		log.info("[inicia] PedidoApplicationService - alteraPedido");
 		ClienteDetalhadoResponse cliente = clienteServicce.buscaClientePorId(idCliente);	
